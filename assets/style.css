@@ -1,0 +1,48 @@
+html, body {
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+}
+
+#navBar {
+    border-bottom: 1px solid #404040;
+}
+
+/* #showList li {
+    border-bottom: 1px solid #404040;
+} */
+
+a, li {
+    text-decoration: none !important;
+    color: #999 !important ;
+}
+
+a:hover {
+    background-color: #101010 !important;
+    color: orange !important;
+}
+
+li {
+    list-style: none;
+}
+
+.bdc {
+    border: 1px solid #808080 !important;
+    border-radius: 5px !important;
+}
+
+.bg1 {
+    background-color: black;
+}
+
+.bg2 {
+    background-color: #101010;
+}
+
+th {
+    font-family: 'Oswald', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    color: #999;
+}

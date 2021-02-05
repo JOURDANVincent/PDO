@@ -1,44 +1,37 @@
 <?php
 
-    // exercice 1: afficher tous les clients de la base colyseum
+    $exercices = 
+    [
+        'Afficher tous les clients',
+        'Afficher tous les types de spectacles possibles',
+        'Afficher les 20 premiers clients',
+        'N\'afficher que les clients possédant une carte de fidélité.',
+        'Afficher uniquement le nom et le prénom de tous les clients dont le nom commence par la lettre "M".
+            Les afficher comme ceci :
+            Nom : Nom du client
+            Prénom : Prénom du client
+            Trier les noms par ordre alphabétique.',
+        'Afficher le titre de tous les spectacles ainsi que l\'artiste, la date et l\'heure.
+         Trier les titres par ordre alphabétique. Afficher les résultat comme ceci : Spectacle par artiste, le date à heure.',
+         'Afficher tous les clients comme ceci :
+         Nom : Nom de famille du client
+         Prénom : Prénom du client
+         Date de naissance : Date de naissance du client
+         Carte de fidélité : Oui (Si le client en possède une) ou Non (s\'il n\'en possède pas)
+         Numéro de carte : Numéro de la carte fidélité du client s\'il en possède une.'
+    ];
 
-    $server_name = 'localhost';
-    $db_name = 'colyseum';
-    $server_user = 'root';
-    $server_password = '';
+    // contrôle de l'id et redirection vers controllers
+    if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])) {
 
-    //On essaie de se connecter
-    try{
+        $id =  intval($_GET['id']);
+        //echo 'id = ' . $id;
 
-        $pdo = new PDO(
-            "mysql:host=$server_name;dbname=$db_name", $serveruser, $serverpassword,
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ]
-        );
+        include ('controllers/ex'.$id.'.php');
 
-        echo '<div class="alert alert-success">Connexion BDD OK !! <br></div>';
+    } else {
 
-        // insertion d'une valeur dans une table existante
-        $sql = "SELECT * FROM `clients`";
-
-        // déclare une variable qui recoit la réponse
-        $query = $pdo->query($sql);
-
-        // traitement de la réponse
-        $posts = $query->fetchAll();
-
-        foreach($posts as $post): ?>
-        <div><? $post->name ?></div>
-        <?php endforeach;
-
-    }
-    
-    /*On capture les exceptions si une exception est lancée et on affiche
-    *les informations relatives à celle-ci*/
-    catch(PDOException $e){
-        echo '<div class="alert alert-danger">Erreur : '. $e->getMessage().'</div>';
+        include ('controllers/ex1.php');
     }
 
-    // on ferme la connexion (en détruisant l'objet on supprime les infos de connexion)
-    echo '<div style="color:white">Fermeture de la connexion..<br></div>';
-    $pdo = null;
+
