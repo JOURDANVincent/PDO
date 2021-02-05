@@ -1,0 +1,81 @@
+html, body {
+    height: 100%;
+    background-color: white;
+    color: black;
+    font-family: 'Oswald', sans-serif;
+}
+
+.txt1 {
+    color: red !important;
+}
+
+.bdc1 {
+    border: 1px solid red !important;
+}
+
+.bg1 {
+    background-color: red;
+}
+
+.bg2 {
+    background-color: #101010;
+}
+
+#navBar {
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+    top: 0;
+    background-color: #9995 !important;
+    backdrop-filter: blur(8px) !important;
+    border-bottom: 1px solid red !important;
+}
+
+.nav-link {
+    color: red !important;
+}
+
+#hospitalLogo {
+    max-height: 80px !important;
+}
+
+#chu {
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    filter: grayscale(80%);
+}
+
+a, li {
+    text-decoration: none !important;
+    color: #999 !important ;
+}
+
+a:hover {
+    border-radius: 5px !important;
+    background-color: #40404040 !important;
+    color: red !important;
+}
+
+li {
+    list-style: none;
+}
+
+input {
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.671) !important;
+    color: #101010 !important;
+}
+
+.btn {
+    border-radius: 5px !important;
+    background-color: red !important;
+    color: white !important;
+}
+
+.btn:hover {
+    background-color: white !important;
+    color: red !important;
+}

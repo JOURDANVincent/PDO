@@ -16,10 +16,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <!-- Mes feuiiles de style -->
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="assets/style.css">
 
     <!-- Titre de la page actuelle -->
-    <title>PDO - exercice <?= $id ?></title>
+    <title>PDO - Partie 1 - exercice <?= $id ?></title>
 
 
 </head>
