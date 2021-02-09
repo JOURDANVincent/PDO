@@ -1,32 +1,23 @@
 <?php
 
-    require 'views/templates/header.php';
 
-    $form_error = [];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST) || $_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET)) {
 
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
-
-        if ($_POST['form'] == 'newPatient' ) {
-
-            include('controllers/ajout-patient_controller.php');
-        }
-        
-    }
-
-    // contrôle de l'id et redirection vers controllers
-    else if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])) {
-
-        $id =  intval($_GET['id']);
-
-        ($id == 1) ? include ('controllers/ajout-patient_controller.php') : '';
-       
+            //appel du controller nouveau patient
+            include dirname(__FILE__).'/controllers/main_controller.php';
 
     } else {
 
-        include('views/home.php');
+        // appel du header
+        require dirname(__FILE__).'/views/templates/header.php';
 
+        // appel de l apage d'accueil
+        include dirname(__FILE__).'/views/home.php';
+
+        // appel du footer
+        require dirname(__FILE__).'/views/templates/footer.php';
     }
 
+    
 
-    require 'views/templates/footer.php';
+    

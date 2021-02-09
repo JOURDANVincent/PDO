@@ -50,6 +50,18 @@ html, body {
 }
 
 
+/* ------------------------------------  bdd statut ------------------------------------ */
+
+#bddStatut {
+    z-index: 999;
+    position: absolute;
+    left: 0 !important;
+    bottom: 50% !important;
+    background-color: #404040;
+    color: black;
+}
+
+
 /* ------------------------------------  navbar ------------------------------------ */
 
 #navBar {
