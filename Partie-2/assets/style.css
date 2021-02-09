@@ -1,4 +1,5 @@
 html, body {
+    position: relative;
     height: 100%;
     background-color: white;
     color: black;
@@ -42,23 +43,46 @@ html, body {
 /* ------------------------------------  background ------------------------------------ */
 
 #bgChu, #bgAjoutPatient {
-    position: fixed;
-    /* z-index: 50; */
+    position: absolute;
+    z-index: 0;
     top: 0 !important;
     left: 0;
     filter: grayscale(80%);
 }
 
 
-/* ------------------------------------  bdd statut ------------------------------------ */
+/* ------------------------------------  message ------------------------------------ */
 
-#bddStatut {
-    z-index: 999;
-    position: absolute;
+#homeMessage {
+    z-index: 1;
+    position: fixed;
     left: 0 !important;
-    bottom: 50% !important;
-    background-color: #404040;
-    color: black;
+    bottom: 0 !important;
+}
+
+
+/* ------------------------------------  bdd success ------------------------------------ */
+
+.bddSuccess {
+    position: absolute;
+    z-index: 99999 !important;
+    top: 100px !important;
+    /* height: 100px; */
+    background-color: rgba(0, 128, 0, 0.6) !important;
+    color: white;
+    backdrop-filter: blur(8px) !important;
+}
+
+/* ------------------------------------  bdd Alert ------------------------------------ */
+
+.bddAlert {
+    position: relative;
+    z-index: 99999 !important;
+    top: 60px !important;
+    /* height: 100px; */
+    background-color: rgba(255, 0, 0, 0.6);
+    color: white;
+    backdrop-filter: blur(8px) !important;
 }
 
 
@@ -66,9 +90,8 @@ html, body {
 
 #navBar {
     position: fixed;
-    z-index: 999;
+    z-index: 9;
     width: 100%;
-    z-index: 99;
     top: 0;
     /* background-color: #9995 !important; */
     backdrop-filter: blur(8px) !important;
@@ -102,6 +125,26 @@ a:hover {
 
 li {
     list-style: none;
+}
+
+
+/*--------------------- scroll bar ------------------------ */
+
+::-webkit-scrollbar-track {
+    background-color: #20202030;
+}
+::-webkit-scrollbar {
+    height: 6px !important;
+    background-color: #20202020;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #808080;
+    border: 1px solid rgba(255, 0, 0, 0.466) !important;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 0, 0, 0.507) !important;
+    border: 1px solid red !important;
 }
 
 

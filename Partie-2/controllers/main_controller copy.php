@@ -1,8 +1,7 @@
 <?php
 
     // élément requis
-    require dirname(__FILE__).'/../models/Patient.php';
-    // require dirname(__FILE__).'/../models/main_model.php';
+    require dirname(__FILE__).'/../models/main_model.php';
     require dirname(__FILE__).'/../utils/regex.php';
 
 
@@ -104,11 +103,8 @@
 
         if (empty($form_error)) {
 
-            // on crée le nouvel objet patient
-            $new_patient = new Patient($lastname, $firstname, $birthdate, $phone, $mail);
-
-            // on envoi en BDD
-            if ($new_patient->add_new_patient()) {
+            // envoi en BDD
+            if (add_new_patient($lastname, $firstname, $birthdate, $phone, $mail)) {
                 
                 // bdd alert message
                 $bdd_alert = $_SESSION['bdd_alert'] = 'nouveau patient enregistré en base de données..<br>'.$lastname.' '.$firstname;

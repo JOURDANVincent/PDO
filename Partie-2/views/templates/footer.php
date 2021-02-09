@@ -1,4 +1,3 @@
-        </div>  <!-- End Row Content-->
 
     </div>  <!-- End Container Content-->
 

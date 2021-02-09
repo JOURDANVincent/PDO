@@ -42,7 +42,8 @@
                     <!-- NavItem -->
                     <div id="navbarContent" class="collapse navbar-collapse">
                         <ul class="navbar-nav justify-content-around">
-                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?id=1">Ajouter client</a></li>
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?id=1">Ajouter patient</a></li>
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?id=2">Liste des patients</a></li>
                             
                         </ul>
                     </div>
@@ -57,7 +58,6 @@
     <!-- Start Main Content -->
     <div class="container-fluid h-100">
 
-        <!-- Start Main Row -->
-        <div class="row h-100 justify-content-center align-items-center">
+        
 
             

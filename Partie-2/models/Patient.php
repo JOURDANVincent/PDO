@@ -1,76 +1,63 @@
 <?php
 
-    function db_connect() {
+require dirname(__FILE__). '/../utils/Database.php';
 
-        $server_name = 'localhost';
-        $db_name = 'hospitale2n';
-        $dsn = "mysql:host=$server_name;dbname=$db_name";
-        $server_user = 'hospitale2n';
-        $server_password = 'dl6X1gnJpveIGaSh';
-        $error = $msg = '';
 
-        $pdo = new PDO(
-            $dsn, $server_user, $server_password,
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ]
-        );
+class Patient {
 
-        // message connexion OK !!
-        echo 'Connexion BDD OK !!';
+    private $_id;
+    private $_lastname;
+    private $_firstname;
+    private $_birthdate;
+    private $_phone;
+    private $_mail;
+    private $_pdo;
 
-        return $pdo;
+    public function __construct($lastname, $firstname, $birthdate, $phone, $mail) {
+
+        $this->_lastname = $lastname;
+        $this->_firstname = $firstname;
+        $this->_birthdate = $birthdate;
+        $this->_phone = $phone;
+        $this->_mail = $mail;
+        $this->_pdo = Database::connect();
     }
+    
 
-
-    function db_disconnect($pdo) {
-
-        // on détruit l'objet pdo connexion
-        $pdo = null;
-
-        // message deconnexion OK !!
-        echo 'Déconnexion BDD OK !!';
-
-        return $pdo;
-    }
-
-
-    function new_entry_check($m) {
+    private function new_entry_check() {
         
         try{  //On essaie de se connecter
 
-            // demande de connexion 
-            $pdo = db_connect();
+            // Préparation de la requête (prepare() et bind())
+            $sql = "SELECT COUNT(`mail`) as 'exist' FROM `patients` WHERE `mail` = ? ";
+            $sth = $this->_pdo->prepare($sql);
 
-            // exercice 1: afficher tous les clients de la base colyseum
-            $sql = "SELECT COUNT(`mail`) as 'exist' FROM `patients` WHERE `mail` = '$m'";
-    
-            // déclare une variable qui recoit la réponse
-            $result = $pdo->prepare($sql);
-            $result->execute();
+            // association des paramètres
+            $sth->bindValue(1 , $this->_mail, PDO::PARAM_STR);   
+
+            // envoie de la requête
+            $sth->execute();
 
             // traitement de la réponse
-            $entry_check_array = $result->fetch();
+            $entry_check_array = $sth->fetch();
 
             // envoi d ela réponse
             return $entry_check_array->exist;
-
     
         } catch(PDOException $e){  // sinon on capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci*/
                 $error = $e->getMessage().'</div>';
                 echo $error;
         }
+
     }
 
+    public function add_new_patient() {
 
-    function add_new_patient($l,$f,$b,$p,$m) {
 
         try{  //On essaie de se connecter
 
-            // demande de connexion 
-            $pdo = db_connect();
-
             // controle de doublon
-            $entry_check = new_entry_check($m);
+            $entry_check = $this->new_entry_check();
 
             var_dump('check_entry : ', $entry_check);
         
@@ -79,11 +66,20 @@
                 // insérer le nouveau patient
                 $sql = "INSERT INTO `patients` 
                             (lastname, firstname, birthdate, phone, mail)
-                        VALUES ('$l','$f','$b','$p','$m')";
+                        VALUES (?, ?, ?, ?, ?)";
+            
+                // préparation de la requête
+                $sth = $this->_pdo->prepare($sql);
 
-                // déclare une variable qui recoit la réponse
-                $result = $pdo->prepare($sql);
-                $result->execute();
+                // utilisation méthode bindvalue
+                $sth->bindValue(1, $this->_lastname, PDO::PARAM_STR);
+                $sth->bindValue(2, $this->_firstname, PDO::PARAM_STR);
+                $sth->bindValue(3, $this->_birthdate, PDO::PARAM_STR);
+                $sth->bindValue(4, $this->_phone, PDO::PARAM_STR);
+                $sth->bindValue(5, $this->_mail, PDO::PARAM_STR);
+
+                // envoi de la requête
+                $sth->execute();
 
                 echo 'données enregistrées en base';
 
@@ -104,23 +100,20 @@
         }
         
         // on ferme la connexion (en détruisant l'objet on supprime les infos de connexion)
-        db_disconnect($pdo);
+        Database::disconnect($this->_pdo);
         
     }
 
 
-    function get_patient_list() {
+    public function get_patient_list() {
 
         try{  //On essaie de se connecter
-
-            // demande de connexion 
-            $pdo = db_connect();
 
             // exercice 1: afficher tous les clients de la base colyseum
             $sql = "SELECT `lastname`, `firstname` FROM `patients`";
     
             // déclare une variable qui recoit la réponse
-            $result = $pdo->prepare($sql);
+            $result = $this->_pdo->prepare($sql);
             $result->execute();
 
             // traitement de la réponse
@@ -136,7 +129,7 @@
         }
         
         // on ferme la connexion (en détruisant l'objet on supprime les infos de connexion)
-        db_disconnect($pdo);
+        Database::disconnect($this->_pdo);
     }
 
-?>
+}
