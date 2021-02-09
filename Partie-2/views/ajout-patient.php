@@ -1,5 +1,7 @@
 
-<div class="form-group col-12 col-lg-6 pt-3 mt-3 bgForm">
+<img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/addPatient.jpg" alt="Photo du chu d'amiens">
+
+<div id="mainContent" class="form-group col-12 col-lg-5 bdc1 bl8 sha1 bgForm">
 
     <!------------------------------------------ nouveau patient ------------------------------------------------>
 
@@ -7,7 +9,10 @@
 
         <fieldset class="mb-2">
 
-            <legend class="txt1 mb-3 text-center">Nouveau patient</legend>
+            <legend class="txt1 py-3 text-center">Nouveau patient</legend>
+
+            
+            <div class="text-center txt1 py-2"><?= $form_error['bdd'] ?? '' ?></div>
 
             <input 
                 class="form-control <?= (isset($form_error['lastname'])) ? 'bgError' : '' ;?> mb-2" 

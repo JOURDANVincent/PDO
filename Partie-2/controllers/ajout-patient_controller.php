@@ -1,11 +1,13 @@
 <?php
 
-    echo 'formulaire';
+    //echo 'formulaire';
 
     require('models/main_model.php');
 
     // on récupère le fichier des REGEX
     include('utils/regex.php');
+
+    $error = $msg = '';
     
     
     // ---------------traitement formulaire ajout patient ---------------------------//
@@ -75,12 +77,14 @@
         if (empty($form_error)) {
 
             // envoi en BDD
-            if (add_new_patient($lastname, $firstname, $birthdate, $mail, $phone)) {
-
+            if (add_new_patient($lastname, $firstname, $birthdate, $phone, $mail)) {
+                
+                // retour page d'accueil
                 //header('location: index.php');
             } else {
 
-                $form_error['pdo'] = 'erreur';
+                // affichage pbm de doublon
+                $form_error['bdd'] = 'Pbm de doublon sur adresse mail !!';;
             }
             
         } else {

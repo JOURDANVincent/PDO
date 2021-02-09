@@ -3,8 +3,8 @@
     $server_name = 'localhost';
     $db_name = 'colyseum';
     $dsn = "mysql:host=$server_name;dbname=$db_name";
-    $server_user = 'root';
-    $server_password = '';
+    $server_user = 'colyseum';
+    $server_password = 'T7d5i5x8KI2uXd65';
     $error = $msg = '';
 
     

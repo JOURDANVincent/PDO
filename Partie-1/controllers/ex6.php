@@ -3,8 +3,8 @@
     $server_name = 'localhost';
     $db_name = 'colyseum';
     $dsn = "mysql:host=$server_name;dbname=$db_name";
-    $server_user = 'root';
-    $server_password = '';
+    $server_user = 'colyseum';
+    $server_password = 'T7d5i5x8KI2uXd65';
     $error = $msg = '';
 
     
@@ -59,21 +59,18 @@
         <?php // remplissage dynamique du tableau
 
             if(!empty($timetable)) {
-
-                $data = '';
             
-                foreach($timetable as $show){
+                foreach($timetable as $show){ ?>
 
-                    $data .=    '<li class="mb-2">
-                                    <span style="color:white">'.$show->title.'</span>
-                                    par <span style="color:white">'.$show->performer.'</span>
-                                    le <span style="color:white">'.$show->date.'</span>
-                                    à <span style="color:white">'.$show->startTime.'</span><br>
-                                </li>';
+                    <li class="mb-2">
+                        <span style="color:white"><?= $show->title ?></span>
+                        par <span style="color:white"><?=$show->performer ?></span>
+                        le <span style="color:white"><?=$show->date ?></span>
+                        à <span style="color:white"><?=$show->startTime ?></span><br>
+                    </li>
                     
-                }
+            <?php } 
 
-                echo $data;
             }
 
         ?> 

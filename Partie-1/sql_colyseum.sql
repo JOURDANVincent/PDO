@@ -1,4 +1,4 @@
-# source C:/xampp/htdocs/MyPhpProjects/PhpDataObject/sql_colyseum.sql;
+# source C:/xampp/htdocs/MyPhpProjects/PhpDataObject/Partie-1/sql_colyseum.sql;
 
 CREATE DATABASE colyseum CHARACTER SET 'utf8';
 

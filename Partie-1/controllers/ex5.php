@@ -3,8 +3,8 @@
     $server_name = 'localhost';
     $db_name = 'colyseum';
     $dsn = "mysql:host=$server_name;dbname=$db_name";
-    $server_user = 'root';
-    $server_password = '';
+    $server_user = 'colyseum';
+    $server_password = 'T7d5i5x8KI2uXd65';
     $error = $msg = '';
 
     
@@ -23,11 +23,11 @@
         $sql = "SELECT `lastName`,`firstName` FROM `clients` WHERE `lastName` LIKE 'M%' ORDER BY `lastName`";
 
         // déclare une variable qui recoit la réponse
-        $result = $pdo->prepare($sql);
-        $result->execute();
+        $PDO_statment = $pdo->prepare($sql);
+        $PDO_statment->execute();
 
         // traitement de la réponse
-        $mClients = $result->fetchAll();
+        $mClients = $PDO_statment->fetchAll();
 
         //var_dump($mClients);
 
@@ -54,18 +54,13 @@
     <ul class="col-12 group-list text-left">
  
         <?php
+            foreach($mClients as $client){ ?>
+                
+                <li> Nom: <span style="color:white"><?= $client->lastName ?></span><br></li>
+                <li> Prénom: <span style="color:white"><?= $client->firstName ?></span><br><br></li>   
 
-            $data = '';
-            
-            foreach($mClients as $client){
-
-                $data .= '<li> Nom: <span style="color:white">'.$client->lastName.'</span><br></li>';
-                $data .= '<li> Prénom: <span style="color:white">'.$client->firstName.'</span><br><br></li>';
-            }
-
-            echo $data;
-        ?>
-
+        <?php } ?>
+        
     </ul>
 
 <?php

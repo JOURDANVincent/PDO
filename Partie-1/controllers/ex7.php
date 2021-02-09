@@ -3,8 +3,8 @@
     $server_name = 'localhost';
     $db_name = 'colyseum';
     $dsn = "mysql:host=$server_name;dbname=$db_name";
-    $server_user = 'root';
-    $server_password = '';
+    $server_user = 'colyseum';
+    $server_password = 'T7d5i5x8KI2uXd65';
     $error = $msg = '';
 
     
@@ -28,8 +28,6 @@
 
         // traitement de la réponse
         $allClients = $result->fetchAll();
-
-        //var_dump($allClients);
 
         // message requête success
         $msg .= '<br>Requête executée avec succès !!';
@@ -59,27 +57,19 @@
         <?php // remplissage dynamique du tableau
 
             if(!empty($allClients)) {
-
-                $data = '';
             
-                foreach($allClients as $client){
+                foreach($allClients as $client){ ?>
 
-                    $data .= '<li> Nom: <span style="color:white">'.$client->lastName.'</span><br></li>';
-                    $data .= '<li> Prénom: <span style="color:white">'.$client->firstName.'</span><br></li>';
-                    $data .= '<li> Date de naissance: <span style="color:white">'.$client->birthDate.'</span><br></li>';
-                    $ans = ($client->card) ? 'oui' : 'non';
-                    $data .= '<li> Carte de fidélité: <span style="color:white">'.$ans.'</span><br></li>';
-                    if ($ans == 'oui') {
-                        $data .= '<li> Numéro de carte: <span style="color:white">'.$client->cardNumber.'</span><br></li>';
-                    }
-                    $data .= '<br>';
-                    
-                }
+                    <li> Nom: <span style="color:white"><?= $client->lastName ?></span><br></li>
+                    <li> Prénom: <span style="color:white"><?= $client->firstName ?></span><br></li>
+                    <li> Date de naissance: <span style="color:white"><?= $client->birthDate ?></span><br></li>
+                    <li> Carte de fidélité: <span style="color:white"><?= $client->card ? 'oui' : 'non' ?></span><br></li>
+                    <?php if ($client->card) { ?>
+                    <li> Numéro de carte: <span style="color:white"><?= $client->cardNumber ?></span><br><br></li>
+                <?php } 
 
-                echo $data;
-            }
-
-        ?> 
+                }   
+            } ?>
 
     </ul>
 

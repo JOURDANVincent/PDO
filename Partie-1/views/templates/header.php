@@ -66,4 +66,4 @@
             <div class="col-12 text-left mb-2">Exercice <?= $id ?> :</div>
             <div class="col-12 text-left mb-3"><?= $exercices[$id - 1] ?></div>
             <!-- <div class="col-2 text-right py-0">Info database</div> -->
-            <div class="col-10 text-left py-0 pl-3 mb-4" style="color:<?= !empty($error) ? 'red' : 'green' ?>"><?= !empty($error) ? $error : $msg ?></div>
+            <div class="col-10 text-left py-0 pl-3 mb-4" style="color:<?= $error ? 'red' : 'green' ?>"><?= $error ? $error : $msg ?></div>

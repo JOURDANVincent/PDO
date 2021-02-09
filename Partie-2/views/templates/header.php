@@ -19,18 +19,18 @@
     <link rel="stylesheet" href="assets/style.css">
 
     <!-- Titre de la page actuelle -->
-    <title>PDO - Partie 2 - hospital2n</title>
+    <title>PDO - Partie 2 - hospitale2n</title>
 
 
 </head>
 
-<body class="">
+<body class="h-100">
 
     <header>
         <div class="container-fluid">
-            <div class="row justify-content-center mt-5">
+            <div class="row justify-content-center">
 
-                <nav id="navBar" class="navbar navbar-expand-md navbar-dark justify-content-md-between py-3">
+                <nav id="navBar" class="navbar navbar-expand-md navbar-dark justify-content-md-between">
 
                     <a class="navbar-brand" href="index.php"><img id="hospitalLogo" src="assets/img/logoHospital.png" alt="icon retour accueil"></a>
 
@@ -55,7 +55,7 @@
 
 
     <!-- Start Main Content -->
-    <div class="container h-100">
+    <div class="container-fluid h-100">
 
         <!-- Start Main Row -->
         <div class="row h-100 justify-content-center align-items-center">

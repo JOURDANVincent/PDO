@@ -5,47 +5,77 @@ html, body {
     font-family: 'Oswald', sans-serif;
 }
 
+
+/* ------------------------------------  thème ------------------------------------ */
+
 .txt1 {
     color: red !important;
 }
 
 .bdc1 {
     border: 1px solid red !important;
+    border-radius: 5px;
+}
+
+.bdcup1 {
+    border-top: 1px solid red !important;
+    box-shadow: 2px 2px 5px 2px rgba(255, 0, 0, 0.301);
 }
 
 .bg1 {
     background-color: red;
 }
 
+.sha1 {
+    box-shadow: 2px 2px 5px 2px rgba(255, 0, 0, 0.301);
+}
+
 .bg2 {
     background-color: #101010;
 }
 
+.bl8 {
+    backdrop-filter: blur(8px);
+}
+
+
+/* ------------------------------------  background ------------------------------------ */
+
+#bgChu, #bgAjoutPatient {
+    position: fixed;
+    /* z-index: 50; */
+    top: 0 !important;
+    left: 0;
+    filter: grayscale(80%);
+}
+
+
+/* ------------------------------------  navbar ------------------------------------ */
+
 #navBar {
     position: fixed;
+    z-index: 999;
     width: 100%;
     z-index: 99;
     top: 0;
-    background-color: #9995 !important;
+    /* background-color: #9995 !important; */
     backdrop-filter: blur(8px) !important;
     border-bottom: 1px solid red !important;
+    box-shadow: 2px 2px 5px 2px rgba(255, 0, 0, 0.301);
 }
 
 .nav-link {
     color: red !important;
 }
 
-#hospitalLogo {
-    max-height: 80px !important;
+.nav-item {
+    font-size: 22px !important;
 }
 
-#chu {
-    position: fixed;
-    z-index: 50;
-    top: 0;
-    left: 0;
-    filter: grayscale(80%);
+#hospitalLogo {
+    max-height: 70px !important;
 }
+
 
 a, li {
     text-decoration: none !important;
@@ -62,11 +92,28 @@ li {
     list-style: none;
 }
 
+
+/* ------------------------------------  mainContent ------------------------------------ */
+
+#mainContent {
+    margin-top: 100px !important;
+}
+
+
+/* ------------------------------------  form ------------------------------------ */
+
 input {
     border: none !important;
     border-radius: 0 !important;
     border-bottom: 1px solid rgba(255, 0, 0, 0.671) !important;
+    background-color: #fff0 !important;
     color: #101010 !important;
+}
+::placeholder {
+    color: #404040 !important;
+}
+input:focus {
+    background-color: #fff0 !important;
 }
 
 .btn {

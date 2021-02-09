@@ -3,8 +3,8 @@
     $server_name = 'localhost';
     $db_name = 'colyseum';
     $dsn = "mysql:host=$server_name;dbname=$db_name";
-    $server_user = 'root';
-    $server_password = '';
+    $server_user = 'colyseum';
+    $server_password = 'T7d5i5x8KI2uXd65';
     $error = $msg = '';
 
     
@@ -20,10 +20,11 @@
         $msg = '<br>Connexion BDD OK !!';
 
         // Afficher tous les types de spectacles possibles.
+
         $sql = "SELECT `type` FROM `showtypes`";
 
         // déclare une variable qui recoit la réponse
-        $result = $pdo->prepare($sql);
+        $result = $pdo->query($sql);
         $result->execute();
 
         // traitement de la réponse

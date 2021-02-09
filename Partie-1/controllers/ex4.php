@@ -3,8 +3,8 @@
     $server_name = 'localhost';
     $db_name = 'colyseum';
     $dsn = "mysql:host=$server_name;dbname=$db_name";
-    $server_user = 'root';
-    $server_password = '';
+    $server_user = 'colyseum';
+    $server_password = 'T7d5i5x8KI2uXd65';
     $error = $msg = '';
 
     
@@ -23,11 +23,11 @@
         $sql = "SELECT `lastName`,`firstName` FROM `clients` WHERE `card` = 1";
 
         // déclare une variable qui recoit la réponse
-        $result = $pdo->prepare($sql);
-        $result->execute();
+        $PDO_statment = $pdo->prepare($sql);
+        $PDO_statment->execute();
 
         // traitement de la réponse
-        $loyaltyClients = $result->fetchAll();
+        $loyaltyClients = $PDO_statment->fetchAll();
 
         // message requête success
         $msg .= '<br>Requête executée avec succès !!';
@@ -78,7 +78,7 @@
                         echo '<tr class="bg2">';
 
                             foreach($item as $data) {
-                                echo '<td>' . (($data != null) ? $data : '-') . '</td>';
+                                echo '<td>' . ($data ? $data : '-') . '</td>';
                             }
 
                         echo '</tr>';
