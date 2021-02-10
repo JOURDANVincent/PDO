@@ -11,7 +11,7 @@
     if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])) {
 
 
-        // traitement de la page demandée
+        // traitement de la page demandée en fonction de l'id
         $id = intval(trim(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
 
         // appel du header
@@ -20,6 +20,7 @@
         switch ($id) {
 
             case 0:
+                // appel de la page d'accueil
                 include dirname(__FILE__).'/index.php';
                 break;
 
@@ -71,7 +72,7 @@
         // traitement input birthdate
         $birthdate = trim(filter_input(INPUT_POST, 'birthdate', FILTER_SANITIZE_STRING));
         if (!empty($birthdate)) {
-            if (empty($birthdate)) {
+            if (!preg_match(R_DATE ,$birthdate)) {
                 $form_error['birthdate'] = 'données invalides';
             }
         } else {
@@ -89,7 +90,7 @@
             $form_error['mail'] = '* champ obligatoire';
         }
         
-        // traitement inout phone
+        // traitement input phone
         $phone = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
         if (!empty($phone)) {
             if (!preg_match(R_PHONE ,$phone)) {

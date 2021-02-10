@@ -3,7 +3,11 @@
     session_start();
 
     // récupère variable en session
+    $error_log = [($_SESSION['error_log'] ?? '')];
     $bdd_alert = ($_SESSION['bdd_alert'] ?? '');
+
+    // déclaration variable générales
+    $error_form = [];
 
     
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST) || $_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])) {
@@ -16,7 +20,7 @@
         // appel du header
         require dirname(__FILE__).'/views/templates/header.php';
 
-        // appel de l apage d'accueil
+        // appel de la page d'accueil
         include dirname(__FILE__).'/views/home.php';
 
         // appel du footer
