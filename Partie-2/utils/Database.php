@@ -22,13 +22,13 @@ class Database {
         return $pdo;
     }
 
-    public static function disconnect($pdo) {
+    // public static function disconnect($pdo) {
 
-        // message connexion OK !!
-        echo 'Deconnexion BDD OK ...';
+    //     // message connexion OK !!
+    //     echo 'Deconnexion BDD OK ...';
 
-        $pdo = null;
+    //     $pdo = null;
 
-        return $pdo;
-    }
+    //     return $pdo;
+    // }
 }

@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <!-- Mes feuiiles de style -->
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="/assets/style.css">
 
     <!-- Titre de la page actuelle -->
     <title>PDO - Partie 2 - hospitale2n</title>

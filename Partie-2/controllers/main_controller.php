@@ -2,11 +2,11 @@
 
     // élément requis
     require dirname(__FILE__).'/../models/Patient.php';
-    // require dirname(__FILE__).'/../models/main_model.php';
+    require dirname(__FILE__).'/../utils/Admin.php';
     require dirname(__FILE__).'/../utils/regex.php';
 
 
-    // ---------------traitement du contenu à afficher ---------------------------//
+    // --------------- -------traitement du contenu à afficher ---------------------------//
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])) {
 
@@ -32,7 +32,8 @@
             case 2:
                 
                 // bbd: récupère liste de spatients
-                $patient_list = get_patients_list();
+                $admin = new Admin();
+                $patients_list = $admin->get_patients_list();
 
                 // appel du formualaire ajout de patient
                 include dirname(__FILE__).'/../views/liste-patients.php';
@@ -44,7 +45,7 @@
     }
 
 
-    // ---------------traitement formulaire ajout patient ---------------------------//
+    // ------------------------ traitement formulaire ajout patient ---------------------------//
 
     else if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
         
@@ -112,7 +113,7 @@
             if ($new_patient->add_new_patient()) {
                 
                 // bdd alert message
-                $bdd_alert = $_SESSION['bdd_alert'] = 'nouveau patient enregistré en base de données..<br>'.$lastname.' '.$firstname;
+                $bdd_alert = $_SESSION['bdd_alert'] = 'nouveau patient enregistré en base de données..<br>Patient: '.$lastname.' '.$firstname;
 
                 // retour page d'accueil
                 header('location: index.php');
@@ -125,7 +126,7 @@
                 // appel du header
                 require dirname(__FILE__).'/../views/templates/header.php';
 
-                // rappel du header
+                // appel de la page ajouter patient
                 require dirname(__FILE__).'/../views/ajout-patient.php';
 
                 // appel du footer
