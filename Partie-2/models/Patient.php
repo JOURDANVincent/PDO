@@ -30,7 +30,7 @@ class Patient {
         try{  //On essaie de se connecter
 
             // Préparation de la requête : compte le nombre d'enregistrement pour une adresse mail donnée
-            $sql = "SELECT COUNT(`mail`) as 'exist' FROM `patients` WHERE `mail` = :m";
+            $sql = "SELECT COUNT(`mail`) as 'exist' FROM `patients` WHERE `mail` = :m;";
             $sth = $this->_pdo->prepare($sql);
 
             // association des paramètres
@@ -46,6 +46,7 @@ class Patient {
             return $entry_check_array->exist;
     
         } catch(PDOException $e){  // sinon on capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci*/
+            
             array_push($error_log, $e->getMessage());
             echo $e->getMessage();
 
@@ -56,7 +57,6 @@ class Patient {
 
     public function add_new_patient() {
 
-
         try{  //On essaie de se connecter
 
             // controle doublon / préésence adresse email     
@@ -65,7 +65,7 @@ class Patient {
                 // insérer le nouveau patient
                 $sql = "INSERT INTO `patients` 
                             (lastname, firstname, birthdate, phone, mail)
-                        VALUES (:lastname, :firstname, :birthdate, :phone, :mail)";
+                        VALUES (:lastname, :firstname, :birthdate, :phone, :mail);";
             
                 // préparation de la requête
                 $sth = $this->_pdo->prepare($sql);
@@ -88,7 +88,6 @@ class Patient {
                 return false;
             }
             
-
         } catch(PDOException $e){  // sinon on capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci*/
             array_push($error_log, $e->getMessage());
             echo $e->getMessage();
@@ -105,32 +104,35 @@ class Patient {
         
     }
 
-
-    public function get_patient_list() {
+    public static function get_patients_list() {
 
         try{  //On essaie de se connecter
 
+            $pdo = Database::connect();
+
             // demande liste des patients
-            $sql = "SELECT `lastname`, `firstname` FROM `patients`";
+            $sql = "SELECT `id`, `lastname`, `firstname` FROM `patients`;";
     
             // déclare une variable qui recoit la réponse
-            $result = $this->_pdo->query($sql);
+            $result = $pdo->query($sql);
 
             // traitement de la réponse
-            $entry_check_array = $result->fetch();
+            $list = $result->fetchAll();
 
             // envoi d ela réponse
-            return $entry_check_array->exist;
+            return $list;
             
 
         } catch(PDOException $e){  // sinon on capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci*/
+            
             array_push($error_log, $e->getMessage());
             echo $e->getMessage();
             return false;
         }
         
         // on ferme la connexion (en détruisant l'objet on supprime les infos de connexion)
-        $this->_pdo = null;
+        $pdo = null;
     }
 
+    
 }

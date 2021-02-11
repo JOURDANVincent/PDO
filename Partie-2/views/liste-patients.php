@@ -1,12 +1,12 @@
 
 <!-- Start Main Row -->
-<div class="row h-100 justify-content-center align-items-center">
+<div id=mainContent class="row h-100 justify-content-center align-items-center">
 
     <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/addPatient.jpg" alt="Photo du chu d'amiens">
 
     <div class="col-4 justify-content-center bg8 bdc1 bl8 sha1">
 
-        <h1 class="txt1 text-center my-3">Liste des patients</h1>
+        <h4 class="txt1 text-center my-3">Liste des patients</h4>
 
         <table class="table text-center">
 
@@ -21,7 +21,7 @@
             <tbody>
                 
                 <?php
-
+                    
                     foreach($patients_list as $patient) { ?>
 
                         <tr>

@@ -2,7 +2,6 @@
 
     // élément requis
     require dirname(__FILE__).'/../models/Patient.php';
-    require dirname(__FILE__).'/../utils/Admin.php';
     require dirname(__FILE__).'/../utils/regex.php';
 
 
@@ -30,10 +29,8 @@
                 break;
 
             case 2:
-                
                 // bbd: récupère liste de spatients
-                $admin = new Admin();
-                $patients_list = $admin->get_patients_list();
+                $patients_list = Patient::get_patients_list();
 
                 // appel du formualaire ajout de patient
                 include dirname(__FILE__).'/../views/liste-patients.php';
@@ -121,16 +118,7 @@
             } else {
 
                 // bdd alert message
-                $bdd_alert = $_SESSION['bdd_alert'] = 'L\'adresse email : '.$mail.' est déjà enregistré en base ..';
-
-                // appel du header
-                require dirname(__FILE__).'/../views/templates/header.php';
-
-                // appel de la page ajouter patient
-                require dirname(__FILE__).'/../views/ajout-patient.php';
-
-                // appel du footer
-                require dirname(__FILE__).'/../views/templates/footer.php';
+                $form_error['add_patient'] = $bdd_alert = $_SESSION['bdd_alert'] = 'L\'adresse email : '.$mail.' est déjà enregistré en base ..';
 
             }
             
@@ -138,6 +126,20 @@
 
         
     } 
+
+
+    if (!empty($form_error)) {
+
+        // appel du header
+        require dirname(__FILE__).'/../views/templates/header.php';
+
+        // appel de la page ajouter patient
+        require dirname(__FILE__).'/../views/ajout-patient.php';
+
+        // appel du footer
+        require dirname(__FILE__).'/../views/templates/footer.php';
+
+    }
     
 ?>
 
