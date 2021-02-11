@@ -31,6 +31,10 @@ html, body {
     background-color: #fff6 !important;
 }
 
+.bgW {
+    background-color: white !important;
+}
+
 .sha1 {
     box-shadow: 2px 2px 5px 2px rgba(255, 0, 0, 0.301);
 }
@@ -190,13 +194,26 @@ input:focus {
     background-color: #fff0 !important;
 }
 
-.btn {
+.btn.bg1 {
     border-radius: 5px !important;
     background-color: red !important;
     color: white !important;
 }
 
-.btn:hover {
+.btn.bg1:hover {
     background-color: white !important;
     color: red !important;
+}
+
+.btn.bgW {
+    background-color: transparent !important;
+    border-radius: 5px !important;
+    border: 1px solid red !important;
+    color: red !important;
+}
+
+.btn.bgW:hover {
+    background-color: white !important;
+    color: red !important;
+    border: 1px solid red !important;
 }

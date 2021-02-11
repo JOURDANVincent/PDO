@@ -24,8 +24,8 @@
                 <div>email <span class="txt1"><?= $patient_profil->mail?></span></div>
                 <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                 <div class="text-center">
-                    <a href="index.php?id=2" class="btn bg1 bdc1 mt-4">Retour</a>
-                    <a href="index.php?id=4&id_patient=<?= $patient_profil->id ?>" class="btn bg1 bdc1 mt-4">Modifier</a>
+                    <a href="index.php?id=2" class="btn bgW mt-4 mr-3 px-4">Retour</a>
+                    <a href="index.php?id=4&id_patient=<?= $patient_profil->id ?>" class="btn bg1 bdc1 mt-4 px-4">Modifier</a>
                 </div>
             </div>
 

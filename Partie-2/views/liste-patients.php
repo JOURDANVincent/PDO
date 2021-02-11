@@ -4,7 +4,7 @@
 
     <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/addPatient.jpg" alt="Photo du chu d'amiens">
 
-    <div class="col-4 justify-content-center bg8 bdc1 bl8 sha1">
+    <div class="col-4 justify-content-center bg8 bdc1 bl8 sha1 mb-5">
 
         <h4 class="txt1 text-center my-3">Liste des patients</h4>
 

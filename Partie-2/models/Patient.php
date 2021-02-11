@@ -90,7 +90,7 @@ class Patient {
             }
             
         } catch(PDOException $e){  // sinon on capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci*/
-            array_push($error_log, $e->getMessage());
+            //array_push($error_log, $e->getMessage());
             echo $e->getMessage();
 
             return false;
@@ -107,39 +107,41 @@ class Patient {
 
     public function update_patient() {
 
+        echo 'date'.$this->_birthdate;
+        echo 'id'.$this->_id;
+        echo 'id'.$this->_lastname;
+        echo 'id'.$this->_firstname;
+
         try{  //On essaie de se connecter
 
-            // controle doublon / préésence adresse email     
-            if (!$this->new_entry_check()){
+            // insérer le nouveau patient
+            $sql = "UPDATE `patients`
+                    SET 
+                        `lastname` = :lastname,
+                        `firstname` = :firstname,
+                        `birthdate` = :birthdate,
+                        `phone` = :phone,
+                        `mail` = :mail
+                    WHERE 
+                        `id` = :id ;";
+        
+            // préparation de la requête
+            $sth = $this->_pdo->prepare($sql);
 
-                // insérer le nouveau patient
-                $sql = "INSERT INTO `patients` 
-                            (lastname, firstname, birthdate, phone, mail)
-                        VALUES (:lastname, :firstname, :birthdate, :phone, :mail);";
-            
-                // préparation de la requête
-                $sth = $this->_pdo->prepare($sql);
+            // association des marqueurs nominatif via méthode bindvalue
+            $sth->bindValue(':lastname', $this->_lastname, PDO::PARAM_STR);
+            $sth->bindValue(':firstname', $this->_firstname, PDO::PARAM_STR);
+            $sth->bindValue(':birthdate', $this->_birthdate, PDO::PARAM_STR);
+            $sth->bindValue(':phone', $this->_phone, PDO::PARAM_STR);
+            $sth->bindValue(':mail', $this->_mail, PDO::PARAM_STR);
+            $sth->bindValue(':id', $this->_id, PDO::PARAM_INT);
 
-                // association des marqueurs nominatif via méthode bindvalue
-                $sth->bindValue(':lastname', $this->_lastname, PDO::PARAM_STR);
-                $sth->bindValue(':firstname', $this->_firstname, PDO::PARAM_STR);
-                $sth->bindValue(':birthdate', $this->_birthdate, PDO::PARAM_STR);
-                $sth->bindValue(':phone', $this->_phone, PDO::PARAM_STR);
-                $sth->bindValue(':mail', $this->_mail, PDO::PARAM_STR);
-
-                // envoi et retourne de la requête préparée
-                return $sth->execute();
-
-            } else {
-
-                // affichage pbm de doublon
-                echo 'Pbm de doublon sur adresse mail !!';
-
-                return false;
-            }
+            // envoi et retourne de la requête préparée
+            return $sth->execute();
             
         } catch(PDOException $e){  // sinon on capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci*/
-            array_push($error_log, $e->getMessage());
+            
+            //array_push($error_log, $e->getMessage());
             echo $e->getMessage();
 
             return false;

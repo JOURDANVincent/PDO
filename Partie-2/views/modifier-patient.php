@@ -5,11 +5,11 @@
     <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/doctor.jpg" alt="Photo du chu d'amiens">
 
     <?php 
-        if(!empty($form_error['add_patient'])) { ?>
+        if(!empty($form_error['update_patient'])) { ?>
 
             <div class="col-12 bddAlert alert alert-danger alert-dismissible align-self-start">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Error!</strong> <?= $form_error['add_patient'] ?>
+                <strong>Error!</strong> <?= $form_error['update_patient'] ?>
             </div>
         <?php
     }  ?>
