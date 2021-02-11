@@ -1,19 +1,18 @@
 <?php
 
-    session_start();
-
-    // récupère variable en session
-    $error_log = [($_SESSION['error_log'] ?? '')];
-    $bdd_alert = ($_SESSION['bdd_alert'] ?? '');
-
     // déclaration variable générales
-    $error_form = [];
-
+    $form_error = [];
     
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST) || $_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])) {
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
 
-            //appel du controller nouveau patient
-            include dirname(__FILE__).'/controllers/main_controller.php';
+        //appel du controller de formulaire
+        include dirname(__FILE__).'/controllers/form_controller.php';
+
+    } else if ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['id'])) {
+
+        //appel du controller gestion de contenu
+        include dirname(__FILE__).'/controllers/content_controller.php';
 
     } else {
 

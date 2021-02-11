@@ -13,15 +13,15 @@
         // traitement de la page demandée en fonction de l'id
         $id = intval(trim(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
 
+        if (!empty($_GET['id_patient'])) {
+
+            $id_patient = intval(trim(filter_input(INPUT_GET, 'id_patient', FILTER_SANITIZE_NUMBER_INT)));
+        }
+
         // appel du header
         require dirname(__FILE__).'/../views/templates/header.php';
 
         switch ($id) {
-
-            case 0:
-                // appel de la page d'accueil
-                include dirname(__FILE__).'/index.php';
-                break;
 
             case 1:
                 // appel du formualaire ajout de patient
@@ -35,6 +35,28 @@
                 // appel du formualaire ajout de patient
                 include dirname(__FILE__).'/../views/liste-patients.php';
                 break;
+
+            case 3:
+                // bdd : récupère données du patient
+                $patient_profil = Patient::get_patient_profil($id_patient);
+
+                // appel du formualaire ajout de patient
+                include dirname(__FILE__).'/../views/profil-patient.php';
+                break;
+
+            case 4:
+                // bdd : récupère données du patient
+                $patient_profil = Patient::get_patient_profil($id_patient);
+
+                // appel du formualaire modifier patient
+                include dirname(__FILE__).'/../views/modifier-patient.php';
+                break;
+
+            default:
+                // appel de la page d'accueil
+                include dirname(__FILE__).'/index.php';
+                break;
+    
         }
 
          // appel du footer
@@ -110,15 +132,15 @@
             if ($new_patient->add_new_patient()) {
                 
                 // bdd alert message
-                $bdd_alert = $_SESSION['bdd_alert'] = 'nouveau patient enregistré en base de données..<br>Patient: '.$lastname.' '.$firstname;
-
+                // $bdd_alert = $_SESSION['bdd_alert'] = 'nouveau patient enregistré en base de données..<br>Patient: '.$lastname.' '.$firstname;
+                $bdd_alert = 'nouveau patient: '.$lastname.' '.$firstname.', enregistré en base de données..';
                 // retour page d'accueil
-                header('location: index.php');
+                header('location: index.php?bdd_alert='.$bdd_alert.'');
                 
             } else {
 
                 // bdd alert message
-                $form_error['add_patient'] = $bdd_alert = $_SESSION['bdd_alert'] = 'L\'adresse email : '.$mail.' est déjà enregistré en base ..';
+                $form_error['add_patient'] ='L\'adresse email : '.$mail.' est déjà enregistré en base de données..';
 
             }
             

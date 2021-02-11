@@ -22,55 +22,54 @@
 
             <fieldset class="mb-2">
 
-                <legend class="txt1 py-3 text-center">Nouveau patient</legend>
+                <legend class="txt1 py-3 text-center">Modifier patient</legend>
 
                 <input 
-                    class="form-control <?= (isset($form_error['lastname'])) ? 'bgError' : '' ;?> mb-2" 
+                    class="form-control <?= (!empty($form_error['lastname'])) ? 'bgError' : '' ;?> mb-2" 
                     type="text" 
                     name="lastname" 
                     placeholder="nom" 
-                    value="<?= (!empty($_POST['lastname'])) ? $_POST['lastname'] : '' ;?>"
+                    value="<?= (!empty($_POST['lastname'])) ? $_POST['lastname'] : $patient_profil->lastname ;?>"
                     pattern ="^[a-zA-Z\-][^0-9]{2,}$" 
                     title="2 lettres mini / aucun chiffre ou caractères spéciaux"
                 >
                 <div class="regexAlert mb-2 mt-0 pl-3"><?= $form_error['lastname'] ?? '' ;?></div>
 
                 <input 
-                    class="form-control <?= (isset($form_error['firstname'])) ? 'bgError' : '' ;?> mb-2" 
+                    class="form-control <?= (!empty($form_error['firstname'])) ? 'bgError' : '' ;?> mb-2" 
                     type="text" 
                     name="firstname" 
                     placeholder="prénom" 
-                    value="<?= (!empty($_POST['firstname'])) ? $_POST['firstname'] : '' ;?>"
+                    value="<?= (!empty($_POST['firstname'])) ? $_POST['firstname'] : $patient_profil->firstname ;?>"
                     required pattern ="^[a-zA-Z\-][^0-9]{2,}$" title="2 lettres mini / aucun chiffre ou caractères spéciaux"
                 >
                 <div class="regexAlert mb-2 mt-0 pl-3"><?= $form_error['firstname'] ?? '' ;?></div>
 
                 <input 
-                    class="form-control col-4 <?= (isset($form_error['birthdaybirthdate'])) ? 'bgError' : '' ;?> mb-2" 
+                    class="form-control col-4 <?= (!empty($form_error['birthdaybirthdate'])) ? 'bgError' : '' ;?> mb-2" 
                     type="date" 
                     name="birthdate" 
-                    placeholder="jj-mm-aaaa" 
-                    value="<?= (!empty($_POST['birthdate'])) ? $_POST['birthdate'] : '' ;?>"
+                    value="<?= (!empty($_POST['birthdate'])) ? $_POST['birthdate'] : $patient_profil->birthdate ;?>"
                     required  
                     title="format jj-mm-aaaa (ex: 20/12/1983)"
                 > 
                 <div class="regexAlert col-4 mb-2 mt-0"><?= $form_error['birthdate'] ?? '' ;?></div>
 
-                <input class="form-control <?= (isset($form_error['phone'])) ? 'bgError' : '' ;?> mb-2" 
+                <input class="form-control <?= (!empty($form_error['phone'])) ? 'bgError' : '' ;?> mb-2" 
                     type="phone" 
                     name="phone" 
                     placeholder="téléphone" 
-                    value="<?= (!empty($_POST['phone'])) ? $_POST['phone'] : '' ;?>"
+                    value="<?= (!empty($_POST['phone'])) ? $_POST['phone'] : $patient_profil->phone ;?>"
                     required pattern="^(0|\+33)[1-9]( *[0-9]{2}){4}$" 
                     title="ex: 06-12-34-56-78"
                 >
                 <div class="regexAlert mb-2 mt-0 pl-3"><?= $form_error['phone'] ?? '' ;?></div>
 
                 <input 
-                    class="form-control <?= (isset($form_error['mail'])) ? 'bgError' : '' ;?> mb-2" 
+                    class="form-control <?= (!empty($form_error['mail'])) ? 'bgError' : '' ;?> mb-2" 
                     type="email" name="mail" 
                     placeholder="email" 
-                    value="<?= (!empty($_POST['mail'])) ? $_POST['mail'] : '' ;?>"
+                    value="<?= (!empty($_POST['mail'])) ? $_POST['mail'] : $patient_profil->mail ;?>"
                     required pattern="^[\w-\.]+@([\w-]+\.)+\.[\w-]{2,5}$" 
                     title="ex: contact@moi.fr"
                 >
@@ -80,8 +79,9 @@
 
             <!------------------------------------------ submit ------------------------------------------------>
             <div class="text-center my-4">
-                <input type="hidden" name="type" value="1">
-                <input class="btn bdc1 px-5" type="submit" value="ajouter">
+                <input type="hidden" name="type" value="2">
+                <input type="hidden" name="id_patient" value="<?= $patient_profil->id ?>">
+                <input class="btn bdc1 px-5" type="submit" value="modifier">
             </div>  
 
         </form>
