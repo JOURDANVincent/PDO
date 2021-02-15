@@ -1,36 +1,30 @@
 <?php
 
-require dirname(__FILE__). '/../utils/Database.php';
+//require dirname(__FILE__). '/../utils/Database.php';
 
 
-class Patient {
+class Appointment {
 
-    private $_id;
-    private $_lastname;
-    private $_firstname;
-    private $_birthdate;
-    private $_phone;
-    private $_mail;
+    protected $_id;
+    private $_dateHour;
+    private $_idPatient;
     private $_pdo;
     
 
-    public function __construct($lastname, $firstname, $birthdate, $phone, $mail, $id=0) {
+    public function __construct($dateHour, $idPatient, $id=0) {
 
-        $this->_lastname = $lastname;
-        $this->_firstname = $firstname;
-        $this->_birthdate = $birthdate;
-        $this->_phone = $phone;
-        $this->_mail = $mail;
+        $this->_dateHour = $dateHour;
+        $this->_idPatient = $idPatient;
         $this->_id = $id;
         $this->_pdo = Database::connect();
     }
     
 
-    private function new_entry_check() {
+    private function new_rdv_check() {
         
         try{  //On essaie de se connecter
 
-            // Préparation de la requête : contrôler l'existance d'une adresse mail avant enregistrement
+            // Préparation de la requête : compte le nombre d'enregistrement pour une adresse mail donnée
             $sql = "SELECT COUNT(`mail`) as 'exist' FROM `patients` WHERE `mail` = :m;";
             $sth = $this->_pdo->prepare($sql);
 
@@ -56,17 +50,17 @@ class Patient {
 
     }
 
-    public function add_new_patient() {
+    public function add_new_rdv() {
 
         try{  //On essaie de se connecter
 
-            if (!$this->new_entry_check()){ // controle doublon    
+            // controle doublon / préésence adresse email     
+            if (!$this->new_rdv_check()){
 
                 // insérer le nouveau patient
                 $sql = "INSERT INTO `patients` 
                             (lastname, firstname, birthdate, phone, mail)
-                        VALUES 
-                            (:lastname, :firstname, :birthdate, :phone, :mail);";
+                        VALUES (:lastname, :firstname, :birthdate, :phone, :mail);";
             
                 // préparation de la requête
                 $sth = $this->_pdo->prepare($sql);
@@ -84,7 +78,7 @@ class Patient {
             } else {
 
                 // affichage pbm de doublon
-                //$bdd_alert = 'Pbm de doublon sur adresse mail !!';
+                echo 'Pbm de doublon sur adresse mail !!';
 
                 return false;
             }
@@ -98,13 +92,19 @@ class Patient {
 
         // récupère ler dernier id inséré
         $this->_id = $this->_pdo->lastInsertId();
+        echo $this->_id;
         
         // on ferme la connexion (en détruisant l'objet on supprime les infos de connexion)
         $this->_pdo = null;
-
+        
     }
 
-    public function update_patient() {
+    public function update_rdv() {
+
+        echo 'date'.$this->_birthdate;
+        echo 'id'.$this->_id;
+        echo 'id'.$this->_lastname;
+        echo 'id'.$this->_firstname;
 
         try{  //On essaie de se connecter
 
@@ -143,34 +143,27 @@ class Patient {
 
         // récupère ler dernier id inséré
         $this->_id = $this->_pdo->lastInsertId();
-        //echo $this->_id;
+        echo $this->_id;
         
         // on ferme la connexion (en détruisant l'objet on supprime les infos de connexion)
         $this->_pdo = null;
         
     }
 
-    public static function get_patients_list($offset = 0, $limit = 10) {
+    public static function get_rdv_list() {
 
         try{  //On essaie de se connecter
 
             $pdo = Database::connect();
 
             // demande liste des patients
-            $sql = "SELECT * FROM `patients` LIMIT :sql_offset, :sql_limit ;";
+            $sql = "SELECT `id`, `lastname`, `firstname` FROM `patients`;";
     
             // déclare une variable qui recoit la réponse
-            $sth = $pdo->prepare($sql);
-
-            // association des marqueurs nominatif via méthode bindvalue
-            $sth->bindValue(':sql_offset', $offset, PDO::PARAM_INT);
-            $sth->bindValue(':sql_limit', $limit, PDO::PARAM_INT);
-
-            // envoi et retourne de la requête préparée
-            $sth->execute();
+            $result = $pdo->query($sql);
 
             // traitement de la réponse
-            $list = $sth->fetchAll();
+            $list = $result->fetchAll();
 
             // envoi d ela réponse
             return $list;
@@ -186,68 +179,4 @@ class Patient {
         $pdo = null;
     }
 
-    public static function get_total_patients() {
-
-        try{  //On essaie de se connecter
-
-            $pdo = Database::connect();
-
-            // Préparation de la requête : contrôler l'existance d'une adresse mail avant enregistrement
-            $sql = "SELECT COUNT(`id`) as 'total' FROM `patients`;";
-            $sth = $pdo->prepare($sql);
-
-            // envoie de la requête
-            $sth->execute();
-
-            // traitement de la réponse
-            $req_total = $sth->fetch();
-
-            // envoi d ela réponse
-            return $req_total->total;
-            
-        } catch(PDOException $e){  // sinon on capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci*/
-            
-            array_push($error_log, $e->getMessage());
-            echo $e->getMessage();
-            return false;
-        }
-        
-        // on ferme la connexion (en détruisant l'objet on supprime les infos de connexion)
-        $pdo = null;
-    }
-
-    public static function get_patient_profil($i) {
-
-        try{  //On essaie de se connecter
-
-            $pdo = Database::connect();
-
-            // demande liste des patients
-            $sql = "SELECT * FROM `patients` WHERE `id` = :id ;";
-    
-            // préparation de la requête
-            $sth = $pdo->prepare($sql);
-
-            // association des marqueurs nominatif via méthode bindvalue
-            $sth->bindValue(':id', $i, PDO::PARAM_INT);
-
-            // envoi et retourne de la requête préparée
-            $sth->execute();
-
-            // traitement de la réponse
-            $profil = $sth->fetch();
-
-            // envoi de la réponse
-            return $profil;
-            
-        } catch(PDOException $e){  // sinon on capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci*/
-            
-            //array_push($error_log, $e->getMessage());
-            echo $e->getMessage();
-            return false;
-        }
-        
-        // on ferme la connexion (en détruisant l'objet on supprime les infos de connexion)
-        $pdo = null;
-    }
 }

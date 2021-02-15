@@ -9,13 +9,13 @@
 
         
         // type de formualire à contrôler
-        if (!empty($_POST['type'])) {
-            $type = intval(trim(filter_input(INPUT_POST, 'type', FILTER_SANITIZE_NUMBER_INT)));
+        if (!empty($_POST['form'])) {
+            $form = intval(trim(filter_input(INPUT_POST, 'form', FILTER_SANITIZE_NUMBER_INT)));
         }
 
         // id du patient en base
-        if (!empty($_POST['id_patient'])) {
-            $id = intval(trim(filter_input(INPUT_POST, 'id_patient', FILTER_SANITIZE_NUMBER_INT)));
+        if (!empty($_POST['id'])) {
+            $id = intval(trim(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT)));
         }
 
         // appel du formulaire patient
@@ -26,8 +26,8 @@
 
         if (empty($form_error)) {
 
-            switch($type) {
 
+            switch($form) {
 
                 case 1: // ajout nouveau patient
 
@@ -71,10 +71,6 @@
                     break;
             }
             
-        } else {
-
-
-            
         } 
     } 
 
@@ -85,7 +81,7 @@
         // appel du header
         require dirname(__FILE__).'/../views/templates/header.php';
 
-        switch($type) {
+        switch($form) {
 
             case 1:
                 // appel de la page ajouter patient

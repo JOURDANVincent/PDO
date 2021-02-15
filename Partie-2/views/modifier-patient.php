@@ -5,13 +5,13 @@
     <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/doctor.jpg" alt="Photo du chu d'amiens">
 
     <?php 
-        if(!empty($form_error['update_patient'])) { ?>
+        if(!empty($bdd_alert)) { ?>
 
-            <div class="col-12 bddAlert alert alert-danger alert-dismissible align-self-start">
+            <div class="col-12 alert alert-<?= $alert_type ?? 'danger' ?> alert-dismissible align-self-start">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Error!</strong> <?= $form_error['update_patient'] ?>
+                <?= $bdd_alert ?>
             </div>
-        <?php
+        <?php 
     }  ?>
 
     <div id="mainContent" class="form-group col-12 col-lg-5 bdc1 bl8 sha1 bgForm">
@@ -44,7 +44,7 @@
                     required pattern ="^[a-zA-Z\-][^0-9]{2,}$" title="2 lettres mini / aucun chiffre ou caractères spéciaux"
                 >
                 <div class="regexAlert mb-2 mt-0 pl-3"><?= $form_error['firstname'] ?? '' ;?></div>
-
+                
                 <input 
                     class="form-control col-4 <?= (!empty($form_error['birthdaybirthdate'])) ? 'bgError' : '' ;?> mb-2" 
                     type="date" 
@@ -79,9 +79,9 @@
 
             <!------------------------------------------ submit ------------------------------------------------>
             <div class="text-center my-4">
-                <input type="hidden" name="type" value="2">
-                <input type="hidden" name="id_patient" value="<?= $patient_profil->id ?>">
-                <input class="btn bdc1 px-5" type="submit" value="modifier">
+                <input type="hidden" name="ctrl" value="4">
+                <input type="hidden" name="id" value="<?= $patient_profil->id ?>">
+                <input class="btn bg1 bdc1 px-5" type="submit" value="mise à jour">
             </div>  
 
         </form>

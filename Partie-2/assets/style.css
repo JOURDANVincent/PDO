@@ -71,7 +71,7 @@ html, body {
 
 /* ------------------------------------  bdd success ------------------------------------ */
 
-.bddSuccess {
+.alert-success {
     position: absolute;
     z-index: 99999 !important;
     top: 100px !important;
@@ -83,12 +83,12 @@ html, body {
 
 /* ------------------------------------  bdd Alert ------------------------------------ */
 
-.bddAlert {
-    position: relative;
+.alert-danger {
+    position: absolute;
     z-index: 99999 !important;
-    top: 80px !important;
+    top: 100px !important;
     /* height: 100px; */
-    background-color: rgba(255, 0, 0, 0.6);
+    background-color: rgba(255, 0, 0, 0.6) !important;
     color: white;
     backdrop-filter: blur(8px) !important;
 }
@@ -201,7 +201,7 @@ input:focus {
 }
 
 .btn.bg1:hover {
-    background-color: white !important;
+    background-color: transparent !important;
     color: red !important;
 }
 

@@ -1,6 +1,5 @@
 <?php
 
-
 // traitement input lastname
 $lastname = trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING));
 if (!empty($lastname)) {

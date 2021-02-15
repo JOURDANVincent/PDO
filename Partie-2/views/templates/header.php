@@ -16,10 +16,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <!-- Mes feuiiles de style -->
-    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="assets/style.css">
 
     <!-- Titre de la page actuelle -->
-    <title>PDO - Partie 2 - hospitale2n</title>
+    <title><?= (!empty($ctrl)) ? $title_page[$ctrl] : 'Accueil' ?></title>
 
 
 </head>
@@ -42,9 +42,12 @@
                     <!-- NavItem -->
                     <div id="navbarContent" class="collapse navbar-collapse">
                         <ul class="navbar-nav justify-content-around">
-                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?id=1">Ajouter patient</a></li>
-                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?id=2">Liste des patients</a></li>
-                            
+
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?ctrl=1">Ajouter patient</a></li>
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?ctrl=2">Liste des patients</a></li>
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?ctrl=99">Ajouter un rendez-vous</a></li>
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?ctrl=99">Liste des rendez-vous</a></li>
+
                         </ul>
                     </div>
                     

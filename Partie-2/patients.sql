@@ -1,7 +1,7 @@
 #------------------------------------------------------------
 #        Script MySQL.
 #
-#       source C:/xampp/htdocs/MyPhpProjects/PhpDataObject/Partie-2/patients.sql;
+#       source C:/wamp64/www/MyPhpProjects/PhpDataObject/Partie-2/patients.sql;
 #------------------------------------------------------------
 CREATE DATABASE IF NOT EXISTS `hospitalE2N` CHARACTER SET 'utf8';
 USE `hospitalE2N`;

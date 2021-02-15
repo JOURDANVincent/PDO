@@ -5,20 +5,20 @@
     <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/doctor.jpg" alt="Photo du chu d'amiens">
 
     <?php 
-        if(!empty($form_error['add_patient'])) { ?>
+        if(!empty($bdd_alert)) { ?>
 
-            <div class="col-12 bddAlert alert alert-danger alert-dismissible align-self-start">
+            <div class="col-12 alert alert-<?= $alert_type ?? 'danger' ?> alert-dismissible align-self-start">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Error!</strong> <?= $form_error['add_patient'] ?>
+                <?= $bdd_alert ?>
             </div>
-        <?php
+        <?php 
     }  ?>
 
     <div id="mainContent" class="form-group col-12 col-lg-5 bdc1 bl8 sha1 bgForm">
 
         <!------------------------------------------ nouveau patient ------------------------------------------------>
 
-        <form action="index.php" method="POST">
+        <form action="" method="POST">
 
             <fieldset class="mb-2">
 
@@ -54,6 +54,7 @@
                     required  
                     title="format jj-mm-aaaa (ex: 20/12/1983)"
                 > 
+
                 <div class="regexAlert col-4 mb-2 mt-0"><?= $form_error['birthdate'] ?? '' ;?></div>
 
                 <input class="form-control <?= (isset($form_error['phone'])) ? 'bgError' : '' ;?> mb-2" 
@@ -80,8 +81,8 @@
 
             <!------------------------------------------ submit ------------------------------------------------>
             <div class="text-center my-4">
-                <input type="hidden" name="type" value="1">
-                <input class="btn bdc1 px-5" type="submit" value="ajouter">
+                <input type="hidden" name="ctrl" value="1">
+                <input class="btn bg1 bdc1 px-5" type="submit" value="ajouter">
             </div>  
 
         </form>

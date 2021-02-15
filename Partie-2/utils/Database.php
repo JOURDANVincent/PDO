@@ -17,18 +17,9 @@ class Database {
         );
 
         // message connexion OK !!
-        echo 'Connexion BDD OK !!';
+        //echo 'Connexion BDD OK !!';
 
         return $pdo;
     }
 
-    // public static function disconnect($pdo) {
-
-    //     // message connexion OK !!
-    //     echo 'Deconnexion BDD OK ...';
-
-    //     $pdo = null;
-
-    //     return $pdo;
-    // }
 }
