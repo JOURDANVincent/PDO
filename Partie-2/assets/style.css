@@ -107,6 +107,15 @@ html, body {
     box-shadow: 2px 2px 5px 2px rgba(255, 0, 0, 0.301);
 }
 
+.dropdown-menu {
+    background-color: #fffa !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+.dropdown-item {
+    color: #202020 !important;
+}
+
 .nav-link {
     color: red !important;
 }
@@ -216,4 +225,17 @@ input:focus {
     background-color: white !important;
     color: red !important;
     border: 1px solid red !important;
+}
+
+.bgError {
+    background-color: rgba(255, 0, 0, 0.25) !important;
+}
+
+#patientSelect {
+    max-height: 300px !important;
+    overflow-y: scroll !important;
+}
+
+#patientSelect .form-check-label:hover {
+    background-color: rgba(255, 0, 0, 0.25) !important;
 }

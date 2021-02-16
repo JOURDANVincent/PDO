@@ -37,9 +37,14 @@
                 require dirname(__FILE__).'/controllers/add_appointment_ctrl.php';
                 break;
 
-            case 10:
-                //appel du controller de formulaire pour rendez-vous
-                require dirname(__FILE__).'/controllers/update_appointment_ctrl.php';
+            case 6:
+                //appel du controller liste des rendez-vous
+                require dirname(__FILE__).'/controllers/appointments-list_ctrl.php';
+                break;
+
+            case 7:
+                //appel du controller afficher fiche rendez-vous
+                require dirname(__FILE__).'/controllers/appointment_data_ctrl.php';
                 break;
 
             default:
@@ -54,12 +59,8 @@
         // appel du header
         require dirname(__FILE__).'/views/templates/header.php';
 
-        if(!empty($_GET['bdd_alert'])) { 
-            
-            $bdd_alert = trim(filter_input(INPUT_GET, 'bdd_alert', FILTER_SANITIZE_STRING));
-            $alert_type = trim(filter_input(INPUT_GET, 'alert_type', FILTER_SANITIZE_STRING));
-        
-        }
+        $bdd_alert = trim(filter_input(INPUT_GET, 'bdd_alert', FILTER_SANITIZE_STRING));
+        $alert_type = trim(filter_input(INPUT_GET, 'alert_type', FILTER_SANITIZE_STRING));
 
         // appel de la page d'accueil
         include dirname(__FILE__).'/views/home.php';

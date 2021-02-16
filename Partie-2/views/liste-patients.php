@@ -4,17 +4,16 @@
 
     <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/addPatient.jpg" alt="Photo du chu d'amiens">
 
-    <?php 
-        if(!empty($bdd_alert)) { ?>
+    <?php if(!empty($bdd_alert)) : ?>
 
-            <div class="col-12 alert alert-<?= $alert_type ?? 'danger' ?> alert-dismissible align-self-start">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <?= $bdd_alert ?>
-            </div>
-        <?php 
-    }  ?>
+        <div class="col-12 alert alert-<?= $alert_type ?? 'danger' ?> alert-dismissible align-self-start">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <?= $bdd_alert ?>
+        </div>
 
-    <div class="col-12 col-lg-8 justify-content-center bg8 bdc1 bl8 sha1 mb-5">
+    <?php endif ?>
+
+    <div class="col-12 col-lg-8 justify-content-center bg8 bdc1 bl8 sha1">
 
         <h4 class="txt1 text-center my-3">Liste des patients</h4>
 
@@ -59,7 +58,7 @@
         <div class="text-center mb-3 txt1">
             <a href="index.php?ctrl=2&limit=10&offset=<?= ($sql_offset - 10) ?>"><span class="mx-2">précédent</span></a>
             <a href="index.php?ctrl=2&limit=10&offset=<?= ($sql_offset + 10) ?>"><span class="mx-2">suivant</span></a>
-            <span class="mx-2"><?= $number_of_patient.' patients' ?></span>
+            <span class="mx-2"><?= $total_patients.' patients' ?></span>
         </div>
 
     </div>

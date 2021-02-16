@@ -6,7 +6,7 @@
 
 
     // récupère le nombre total de patient
-    $number_of_patient = Patient::get_total_patients();
+    $total_patients = Patient::get_total_patients();
 
     // traitement de limit pour gérer l'affichage
     $sql_limit = intval(trim(filter_input(INPUT_GET, 'limit', FILTER_SANITIZE_NUMBER_INT)));
@@ -20,42 +20,41 @@
     $sql_offset = intval(trim(filter_input(INPUT_GET, 'offset', FILTER_SANITIZE_NUMBER_INT)));
     if($sql_offset <= 0) {
         $sql_offset = 0;
-    } else if ($sql_offset > ($number_of_patient - $sql_limit)) {
-        $sql_offset = $number_of_patient - $sql_limit;
-    } else {
-        $sql_offset = 0;
-    }
-
+    } else if ($sql_offset > ($total_patients - $sql_limit)) {
+        $sql_offset = $sql_offset - $sql_limit;
+    } 
 
     // bbd: récupère liste de spatients
     $patients_list = Patient::get_patients_list($sql_offset, $sql_limit);
-
-    if (!$patients_list) {
+    
+    if (!$patients_list || !is_array($patients_list)) {
 
         // si erreur on renvoi sur liste des patients
-        $bdd_alert  = 'Erreur accès liste patients : identifiant inconnu';
+        $bdd_alert  = 'code '.$patients_list.' : Erreur accès liste patients';
         header('location: index.php?alert_type=danger&bdd_alert='.$bdd_alert.'');
     }
 
     //récupère les messages d'alerte success et danger
-    if(!empty($_GET['bdd_alert']) && !empty($_GET['alert_type'])) {  
-        $bdd_alert = trim(filter_input(INPUT_GET, 'bdd_alert', FILTER_SANITIZE_STRING));
-        $alert_type = trim(filter_input(INPUT_GET, 'alert_type', FILTER_SANITIZE_STRING));
-    }
+    $bdd_alert = trim(filter_input(INPUT_GET, 'bdd_alert', FILTER_SANITIZE_STRING));
+    $alert_type = trim(filter_input(INPUT_GET, 'alert_type', FILTER_SANITIZE_STRING));
 
 
     // -----------------------------------------------------------
-    // affichage de la vue ajout-patient
+    // affichage de la vue liste des patients
     // -----------------------------------------------------------
 
     // appel du header
     require dirname(__FILE__).'/../views/templates/header.php';
 
-    // appel de la page ajouter patient
+    // appel de la page liste patient
     include dirname(__FILE__).'/../views/liste-patients.php';
 
     // appel du footer
     require dirname(__FILE__).'/../views/templates/footer.php';
+
+    // -----------------------------------------------------------
+    // affichage de la vue liste des patients
+    // -----------------------------------------------------------
 
 ?>
 

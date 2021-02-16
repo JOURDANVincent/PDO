@@ -7,7 +7,9 @@
 
     // déclaration des variables
     $form_error = [];
+    $bdd_error = [];
 
+    // tableau titre de page
     $title_page = [
         'Accueil',
         'Ajouter patient',

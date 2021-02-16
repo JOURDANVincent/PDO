@@ -3,17 +3,16 @@
 
     <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/doctor.jpg" alt="Photo du chu d'amiens">
 
-    <?php 
-        if(!empty($bdd_alert)) { ?>
+    <?php if(!empty($bdd_alert)) : ?>
 
-            <div class="col-12 alert alert-<?= $alert_type ?? 'danger' ?> alert-dismissible align-self-start">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <?= $bdd_alert ?>
-            </div>
-        <?php 
-    }  ?>
+        <div class="col-12 alert alert-<?= $alert_type ?? 'danger' ?> alert-dismissible align-self-start">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <?= $bdd_alert ?>
+        </div>
 
-    <div id="mainContent" class="form-group col-4 bdc1 bl8 sha1 bgForm">
+    <?php endif ?>
+
+    <div id="mainContent" class="form-group col-4 bdc1 bl8 sha1 bgForm ">
 
         <!------------------------------------------ nouveau patient ------------------------------------------------>
 
@@ -23,14 +22,29 @@
 
                 <legend class="txt1 py-3 text-center">Nouveau rendez-vous</legend>
 
+                <label class="txt1">Sélectionner patient dans la liste</label>
+                <div id="patientSelect" class="form-check mb-4 bdc1 pl-4 py-3">
+
+                    <?php foreach($patients_list as $patient) : ?>
+                        <div class="d-flex">
+                            <input required class="form-check-input" type="radio" name="idPatients" value="<?= $patient->id ?>" id="<?= $patient->id ?>">
+                            <label class="form-check-label" for="<?= $patient->id ?>">
+                                <?= $patient->lastname.' '.$patient->firstname.' | '.$patient->mail ?>
+                            </label>
+                        </div>
+                    <?php endforeach ?>
+                    
+                </div>
+                    
+                <label class="txt1">Sélectionner date et heure du rendez-vous</label>
                 <input 
-                    class="form-control <?= (!empty($form_error['lastname'])) ? 'bgError' : '' ;?> mb-2" 
+                    class="form-control <?= (!empty($form_error['dateHour'])) ? 'bgError' : '' ;?> mb-2" 
                     type="datetime-local" 
-                    min="2018-06-07T00:00" 
-                    max="2018-06-14T00:00"
-                    name="lastname" 
-                    placeholder="nom" 
-                    value="<?= (!empty($_POST['dateHour'])) ? $_POST['dateHour'] : '2018-06-12T19:30' ;?>"
+                    min="<?= $actual_date ?>" 
+                    max=""
+                    name="dateHour" 
+                    placeholder="date et heure" 
+                    value="<?= $dateHour ?? $actual_date ;?>"
                     required 
                 >
                 <div class="regexAlert mb-2 mt-0 pl-3"><?= $form_error['dateHour'] ?? '' ;?></div>
@@ -39,9 +53,8 @@
 
             <!------------------------------------------ submit ------------------------------------------------>
             <div class="text-center my-4">
-                <input type="hidden" name="which" value="2">
-                <input type="hidden" name="type" value="1">
-                <!-- <input type="hidden" name="id_patient" value="<?= $patient_profil->id ?>"> -->
+                <input type="hidden" name="ctrl" value="5">
+                <!-- <input type="hidden" name="id" value="<?= $patient->id ?>"> -->
                 <input class="btn bg1 bdc1 px-5" type="submit" value="ajouter">
             </div>  
 

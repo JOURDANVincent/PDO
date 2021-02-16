@@ -22,20 +22,19 @@
             // on envoi en BDD
             if ($new_patient->add_new_patient()) {
                 
+                // retour page d'accueil et affichage message success !
                 $bdd_alert = 'nouveau patient: '.$lastname.' '.$firstname.', enregistré en base de données..';
-                // retour page d'accueil
                 header('location: index.php?alert_type=success&bdd_alert='.$bdd_alert.'');
                 
             } else {
 
                 // bdd alert message
                 $alert_type = 'danger';
-                $bdd_alert ='L\'adresse email : '.$mail.' est déjà enregistré en base de données..';
+                $bdd_alert = 'L\'adresse email '.$mail.' est déjà enregistré en base de données..';
 
             }
             
         } 
-
 
     } 
 
@@ -51,6 +50,10 @@
 
     // appel du footer
     require dirname(__FILE__).'/../views/templates/footer.php';
+
+    // -----------------------------------------------------------
+    // affichage de la vue ajout-patient
+    // -----------------------------------------------------------
 
 ?>
 

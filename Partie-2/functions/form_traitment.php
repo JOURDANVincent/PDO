@@ -34,7 +34,7 @@ if (!empty($birthdate)) {
 $mail = trim(filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL));
 if (!empty($mail)) { 
     if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-        $form_error['mail'] = '* Le mail n\'est pas valide';
+        $form_error['mail'] = '* L\'email n\'est pas valide';
     }
 }
 else {
