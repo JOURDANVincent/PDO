@@ -2,7 +2,7 @@
 <!-- Start Main Row -->
 <div id='mainContent' class="row h-100 justify-content-center align-items-center">
 
-    <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/addPatient.jpg" alt="Photo du chu d'amiens">
+    <img id="wall" class="img-fluid text-center" src="assets/img/addPatient.jpg" alt="Photo du chu d'amiens">
 
     <?php if(!empty($bdd_alert)) : ?>
 
@@ -21,41 +21,40 @@
 
             <thead>
                 <tr class="txt1">
+                    <th scope="col">#</th>
                     <th scope="col">Date</th>
                     <th scope="col">Heure</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
+                    <th scope="col">Email</th>
                 </tr>
             </thead>
 
             <tbody>
-                
-                <?php
+                <?php foreach($appointments_list as $appointment) :
+
+                    // on déclare une variable $date et une $hour
+                    $date = implode('/', explode('-', explode(' ', $appointment->dateHour)[0]));
+                    $hour = explode(' ', $appointment->dateHour)[1]; ?>
                     
-                    foreach($appointments_list as $appointment) { 
-                        
-                        //echo $appointment->dateHour;
-                        // on déclare une variable $date et une $hour
-                        $date = implode('/', explode('-', explode(' ', $appointment->dateHour)[0]));
-                        $hour = explode(' ', $appointment->dateHour)[1]; ?>
+                    <tr onclick="location.href='index.php?ctrl=7&idP=<?= $appointment->idPatients ?>&idA=<?= $appointment->id ?>'">
+                        <td><?= $a ?></td>
+                        <td><?= $date ?></td>
+                        <td><?= $hour ?></td>
+                        <td><?= $appointment->lastname ?></td>
+                        <td><?= $appointment->firstname ?></td>
+                        <td><?= $appointment->mail ?></td>
+                    </tr>
 
-                        <tr onclick="location.href='index.php?ctrl=7&idPatients=<?= $appointment->idPatients ?>&idAppointment=<?= $appointment->id ?>'">
-                            <td><?= $date ?></td>
-                            <td><?= $hour ?></td>
-                            <td><?= $appointment->lastname ?></td>
-                            <td><?= $appointment->firstname ?></td>
-                        </tr>
-
-                <?php } ?>
-
+                <?php $a++; endforeach ?>
             </tbody>
 
         </table>
 
         <div class="text-center mb-3 txt1">
-            <!-- <a href="index.php?ctrl=2&limit=10&offset=<?= ($sql_offset - 10) ?>"><span class="mx-2">précédent</span></a>
-            <a href="index.php?ctrl=2&limit=10&offset=<?= ($sql_offset + 10) ?>"><span class="mx-2">suivant</span></a> -->
-            <!-- <span class="mx-2"><?= $number_of_patient.' patients' ?></span> -->
+            <a href="index.php?ctrl=6&limit=10&offset=<?= ($sql_offset - 10) ?>"><span class="mx-2">précédent</span></a>
+            <a href="index.php?ctrl=6&limit=10&offset=<?= ($sql_offset + 10) ?>"><span class="mx-2">suivant</span></a>
+            <span class="mx-2"><?= $total_appointments.' rendez-vous' ?></span>
         </div>
 
     </div>

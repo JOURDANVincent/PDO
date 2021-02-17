@@ -2,7 +2,7 @@
 <!-- Start Main Row -->
 <div id='mainContent' class="row h-100 justify-content-center align-items-center">
 
-    <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/addPatient.jpg" alt="Photo du chu d'amiens">
+    <img id="wall" class="img-fluid text-center" src="assets/img/addPatient.jpg" alt="Photo du chu d'amiens">
 
     <?php if(!empty($bdd_alert)) : ?>
 
@@ -17,11 +17,12 @@
 
         <h4 class="txt1 text-center my-3">Liste des patients</h4>
 
-        <table class="table table-hover text-center">
+        <table class="table table-hover">
 
             <thead>
                 <tr class="txt1">
-                    <th scope="col">#</th>
+                <th scope="col"></th>
+                    <th scope="col text-center">#</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
                     <th scope="col">Anniversaire</th>
@@ -31,26 +32,24 @@
             </thead>
 
             <tbody>
-                
-                <?php
-                    
-                    foreach($patients_list as $patient) { 
+                <?php foreach($patients_list as $patient) :
                         
-                        // on réécrit la date (jj-mm-aaaa)
-                        $patient->birthdate = implode('/', array_reverse(explode('-', $patient->birthdate))); ?>
+                    // on réécrit la date (jj-mm-aaaa)
+                    $patient->birthdate = implode('/', array_reverse(explode('-', $patient->birthdate))); ?>
 
-                        <tr onclick="location.href='index.php?ctrl=3&id=<?= $patient->id ?>'">
-                            <td><?= $patient->id ?></td>
-                            <td><?= $patient->lastname ?></td>
-                            <td><?= $patient->firstname ?></td>
-                            <td><?= $patient->birthdate ?></td>
-                            <td><?= $patient->phone ?></td>
-                            <td><?= $patient->mail ?></td>
-                            <td><img style="max-width:20px;" src="assets/icon/eye.svg" alt="icon vue"></td>
-                        </tr>
+                    <tr onclick="location.href='index.php?ctrl=3&id=<?= $patient->id ?>'">
+                        <td>
+                            <img style="max-width:20px;" src="assets/icon/setPatientProfil.svg" alt="icon modifier">
+                        </td>
+                        <td class=""><?= $patient->id ?></td>
+                        <td><?= $patient->lastname ?></td>
+                        <td><?= $patient->firstname ?></td>
+                        <td><?= $patient->birthdate ?></td>
+                        <td><?= $patient->phone ?></td>
+                        <td><?= $patient->mail ?></td>
+                    </tr>
 
-                <?php } ?>
-
+                <?php endforeach ?>
             </tbody>
 
         </table>

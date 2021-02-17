@@ -47,6 +47,11 @@
                 require dirname(__FILE__).'/controllers/appointment_data_ctrl.php';
                 break;
 
+            case 8:
+                //appel du controller modifier rendez-vous
+                require dirname(__FILE__).'/controllers/update_appointment_ctrl.php';
+                break;
+
             default:
                 // retour page d'accueil
                 header('location: index.php');

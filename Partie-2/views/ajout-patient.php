@@ -2,7 +2,7 @@
 <!-- Start Main Row -->
 <div class="row h-100 justify-content-center align-items-center">
 
-    <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/doctor.jpg" alt="Photo du chu d'amiens">
+    <img id="wall" class="img-fluid text-center" src="assets/img/doctor.jpg" alt="Photo du chu d'amiens">
 
     <?php if(!empty($bdd_alert)) : ?>
 
@@ -13,7 +13,7 @@
 
     <?php endif ?>
 
-    <div id="mainContent" class="form-group col-12 col-lg-5 bdc1 bl8 sha1 bgForm">
+    <div id="mainContent" class="form-group col-12 col-lg-5 bdc1 bl8 sha1 bgForm px-4">
 
         <!------------------------------------------ nouveau patient ------------------------------------------------>
 

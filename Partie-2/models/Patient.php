@@ -91,6 +91,27 @@ class Patient {
 
     }
 
+    public static function get_last_id() {
+
+        try{  //On essaie de se connecter
+
+            $pdo = Database::connect();
+
+            // Préparation de la requête : demande id dernier enregistrement
+            $sql = "SELECT MAX(`id`) as 'id' FROM `patients`;";
+
+            // exécute la requête
+            $sth = $pdo->query($sql);
+
+            //retourne le dernier id enregistré
+            return $sth->fetch();
+
+        } catch(PDOException $e){  // sinon on capture les exceptions si une exception est lancée et on affiche les informations relatives à celle-ci*/
+            
+            return $e->getCode();
+        }
+    }
+
     public static function get_patients_list($offset = 0, $limit = 10) {
 
         try{  //On essaie de se connecter

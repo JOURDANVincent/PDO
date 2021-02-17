@@ -20,7 +20,7 @@
     $sql_offset = intval(trim(filter_input(INPUT_GET, 'offset', FILTER_SANITIZE_NUMBER_INT)));
     if($sql_offset <= 0) {
         $sql_offset = 0;
-    } else if ($sql_offset > ($total_patients - $sql_limit)) {
+    } else if ($sql_offset >= ($total_patients)) {
         $sql_offset = $sql_offset - $sql_limit;
     } 
 

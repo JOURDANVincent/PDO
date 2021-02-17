@@ -87,7 +87,7 @@
     require dirname(__FILE__).'/../views/templates/header.php';
 
     // appel de la page ajouter rendez-vous
-    include dirname(__FILE__).'/../views/ajout-rendezvous.php';
+    include dirname(__FILE__).'/../views/modifier-rendezvous.php';
 
     // appel du footer
     require dirname(__FILE__).'/../views/templates/footer.php';

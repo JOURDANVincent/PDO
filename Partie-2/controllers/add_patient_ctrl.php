@@ -21,10 +21,13 @@
 
             // on envoi en BDD
             if ($new_patient->add_new_patient()) {
+
+                $last_id = Patient::get_last_id();
                 
                 // retour page d'accueil et affichage message success !
                 $bdd_alert = 'nouveau patient: '.$lastname.' '.$firstname.', enregistré en base de données..';
-                header('location: index.php?alert_type=success&bdd_alert='.$bdd_alert.'');
+                header('location: index.php?ctrl=3&id='.$last_id->id.'&lastctrl=1&alert_type=success&bdd_alert='.$bdd_alert.'');
+                // modifier ctrl=2 par 3 pour afficher le nouveau patient
                 
             } else {
 

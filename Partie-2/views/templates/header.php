@@ -30,7 +30,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
 
-                <nav id="navBar" class="navbar navbar-expand-md navbar-dark pl-5">
+                <nav id="navBar" class="navbar navbar-expand-md navbar-dark justify-content-md-between">
 
                     <a class="navbar-brand" href="index.php"><img id="hospitalLogo" src="assets/img/logoHospital.png" alt="icon retour accueil"></a>
 
@@ -40,24 +40,20 @@
                     </button>
 
                     <!-- NavItem -->
-                    <div id="navbarContent" class="collapse navbar-collapse justify-content-end pr-5">
+                    <div id="navbarContent" class="collapse navbar-collapse">
+                        
+                        <ul class="navbar-nav justify-content-around">
 
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle txt1" id="patientItem" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Patient</a>
-                                <div class="dropdown-menu " aria-labellphp="patientItem">
-                                    <a class="dropdown-item" href="index.php?ctrl=1">Ajouter patient</a>
-                                    <a class="dropdown-item" href="index.php?ctrl=2">Liste des patients</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle txt1" id="appointmentItem" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rendez-vous</a>
-                                <div class="dropdown-menu " aria-labellphp="appointmentItem">
-                                    <a class="dropdown-item" href="index.php?ctrl=5">Ajouter rendez-vous</a>
-                                    <a class="dropdown-item" href="index.php?ctrl=6">Liste des rendez-vous</a>
-                                </div>
-                            </li>
-                            
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?ctrl=1">
+                                Ajouter patient
+                            </a></li>
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?ctrl=2">
+                                <img src="assets/icon/" alt=""> Liste des patients</a></li>
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?ctrl=5">
+                                <img src="assets/icon" alt=""> Ajouter un rendez-vous</a></li>
+                            <li class="nav-item"><a class="nav-link mx-2" href="index.php?ctrl=6">
+                                <img src="assets/icon" alt=""> Liste des rendez-vous</a></li>
+
                         </ul>
                     </div>
                     

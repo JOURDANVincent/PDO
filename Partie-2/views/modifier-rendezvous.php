@@ -12,6 +12,7 @@
 
     <?php endif ?>
 
+
     <div id="mainContent" class="form-group col-4 bdc1 bl8 sha1 bgForm ">
 
         <!------------------------------------------ nouveau patient ------------------------------------------------>
@@ -20,10 +21,16 @@
 
             <fieldset class="mb-2">
 
-                <legend class="txt1 py-3 text-center">Nouveau rendez-vous</legend>
+                <legend class="txt1 pt-3 text-center">Rendez-vous</legend>
 
-                <label class="txt1 mb-3">Sélectionner du patient</label>
-                <div id="patientSelect" class="form-check mb-4 bg8 bdc1 pl-4 py-3">
+                <div class="py-2 px-3 bg8 bl8">
+                    <label class="txt1 text-center">Ancien rendez-vous</label>
+                    <div>Patient :</div>
+                    <div>Rendez-vous :</div>
+                </div>
+
+                <label class="txt1 my-3">Modifier patient</label>
+                <div id="newPatientSelect" class="form-check mb-4 bg8 bdc1 pl-4 py-3">
 
                     <?php foreach($patients_list as $patient) : ?>
                         <div class="d-flex">
@@ -36,7 +43,7 @@
                     
                 </div>
                     
-                <label class="txt1">Sélection date et heure du rendez-vous</label>
+                <label class="txt1">Modifier date et/ou heure du rendez-vous</label>
                 <input 
                     class="form-control <?= (!empty($form_error['dateHour'])) ? 'bgError' : '' ;?> mb-2" 
                     type="datetime-local" 
@@ -55,7 +62,7 @@
             <div class="text-center my-4">
                 <input type="hidden" name="ctrl" value="5">
                 <!-- <input type="hidden" name="id" value="<?= $patient->id ?>"> -->
-                <input class="btn bg1 bdc1 px-5" type="submit" value="ajouter">
+                <input class="btn bg1 bdc1 px-5" type="submit" value="mise à jour">
             </div>  
 
         </form>

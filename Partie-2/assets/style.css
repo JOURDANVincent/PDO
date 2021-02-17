@@ -50,7 +50,7 @@ html, body {
 
 /* ------------------------------------  background ------------------------------------ */
 
-#bgChu, #bgAjoutPatient {
+#wall {
     position: fixed;
     z-index: 0;
     top: 0 !important;
@@ -128,10 +128,14 @@ html, body {
     max-height: 70px !important;
 }
 
+#navbarContent img {
+    max-height: 50px !important;
+} 
+
 
 a, li {
     text-decoration: none !important;
-    color: #999 !important ;
+    color: #444 !important ;
 }
 
 a:hover {
@@ -197,7 +201,7 @@ input {
     color: #101010 !important;
 }
 ::placeholder {
-    color: #404040 !important;
+    color: #101010 !important;
 }
 input:focus {
     background-color: #fff0 !important;
@@ -235,7 +239,27 @@ input:focus {
     max-height: 300px !important;
     overflow-y: scroll !important;
 }
+#newPatientSelect {
+    max-height: 200px !important;
+    overflow-y: scroll !important;
+}
 
-#patientSelect .form-check-label:hover {
+#patientSelect .form-check-label:hover,
+#newPatientSelect .form-check-label:hover {
     background-color: rgba(255, 0, 0, 0.25) !important;
+    border-radius: 3px !important;
+    padding: 5px;
+}
+
+#patientSelect input[type="radio"],
+#newPatientSelect input[type="radio"] {
+    display: none !important;
+    border-radius: 3px !important;
+}
+
+#patientSelect input[type="radio"]:checked + label,
+#newPatientSelect input[type="radio"]:checked + label{
+    background-color: rgba(255, 0, 0, 0.5) !important;
+    padding: 5px !important;
+    border-radius: 3px !important;
 }

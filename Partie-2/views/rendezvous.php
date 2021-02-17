@@ -1,8 +1,8 @@
 
 <!-- Start Main Row -->
-<div id='mainContent' class="row h-100 justify-content-center align-items-center">
+<div id='' class="row h-100 justify-content-center align-items-center">
 
-    <img id="bgAjoutPatient" class="img-fluid text-center" src="assets/img/addPatient.jpg" alt="Photo du chu d'amiens">
+    <img id="wall" class="img-fluid text-center" src="assets/img/stetoscope.jpg" alt="Photo du chu d'amiens">
 
     <?php if(!empty($bdd_alert)) : ?>
 
@@ -13,51 +13,28 @@
 
     <?php endif ?>
 
-    <div class="col-12 col-lg-6 justify-content-center bg8 bdc1 bl8 sha1 mb-5">
+    <div class="col-4 justify-content-center">
+        <div class="card pt-4 bl8 bdc1 sha1 bg8" >
 
-        <h4 class="txt1 text-center my-3">Liste des rendez-vous</h4>
+            <div class="text-center">
+                <img class="card-img-top img-fluid" style="max-width:150px;" src="assets/icon/appointment.svg" alt="Card image cap">
+            </div>
 
-        <table class="table table-hover text-center">
-
-            <thead>
-                <tr class="txt1">
-                    <th scope="col">Date</th>
-                    <th scope="col">Heure</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                </tr>
-            </thead>
-
-            <tbody>
+            <div class="card-body">
+                <h5 class="card-title">Rendez-vous</h5>
+                <div class="mb-3">le <span class="txt1"><?= $date?></span> à <span class="txt1"><?= $hour?></span></div>
+                <div>avec Mr <span class="txt1"><?= $appointment_data->lastname.' '.$appointment_data->firstname?></span></div>
                 
-                <?php
-                    
-                    foreach($appointments_list as $appointment) { 
-                        
-                        //echo $appointment->dateHour;
-                        // on déclare une variable $date et une $hour
-                        $date = implode('/', explode('-', explode(' ', $appointment->dateHour)[0]));
-                        $hour = explode(' ', $appointment->dateHour)[1]; ?>
+                <div>téléphone <span class="txt1"><?= $appointment_data->phone?></span></div>
+                <!-- <div>email <span class="txt1"><?php //$appointment_data->mail?></span></div> -->
 
-                        <tr onclick="location.href='index.php?ctrl=6&idPatients=<?= $appointment->idPatients ?>&idAppointment=<?= $appointment->id ?>'">
-                            <td><?= $date ?></td>
-                            <td><?= $hour ?></td>
-                            <td><?= $appointment->lastname ?></td>
-                            <td><?= $appointment->firstname ?></td>
-                        </tr>
+                <div class="text-center">
+                    <a href="index.php?ctrl=2" class="btn bgW mt-4 mr-3 px-4">Retour</a>
+                    <a href="index.php?ctrl=8&idA=<?= $appointment_data->id ?>&idP=<?= $appointment_data->idPatients ?>" class="btn bg1 bdc1 mt-4 px-4">Modifier</a>
+                </div>
+            </div>
 
-                <?php } ?>
-
-            </tbody>
-
-        </table>
-
-        <div class="text-center mb-3 txt1">
-            <!-- <a href="index.php?ctrl=2&limit=10&offset=<?= ($sql_offset - 10) ?>"><span class="mx-2">précédent</span></a>
-            <a href="index.php?ctrl=2&limit=10&offset=<?= ($sql_offset + 10) ?>"><span class="mx-2">suivant</span></a> -->
-            <!-- <span class="mx-2"><?= $number_of_patient.' patients' ?></span> -->
         </div>
-
     </div>
 
 </div>
