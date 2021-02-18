@@ -15,8 +15,7 @@
     if (!$total_patients) {
 
         // si erreur on renvoi sur liste des appointments
-        $bdd_alert  = 'Erreur accès nombre de  patients';
-        header('location: index.php?alert_type=danger&bdd_alert='.$bdd_alert.'');
+        header('location: index.php?ctrl=6&alert=4');
     }
 
     // bbd: récupère liste des patients
@@ -25,12 +24,28 @@
     if (!$patients_list) {
 
         // si erreur on renvoi sur liste des appointments
-        $bdd_alert  = 'Erreur accès liste des patients : identifiant inconnu';
-        header('location: index.php?alert_type=danger&bdd_alert='.$bdd_alert.'');
+        header('location: index.php?ctrl=6&alert=4');
+    }
+
+
+    // traitement de l'id et idPatients envoyé
+    $idA = intval(trim(filter_input($post, 'idA', FILTER_SANITIZE_NUMBER_INT)));
+    $idP = intval(trim(filter_input($post, 'idP', FILTER_SANITIZE_NUMBER_INT)));
+
+    $old_appointment = Appointment::get_appointment_data($idA,$idP);
+    
+
+    if (!$old_appointment) {
+
+        // si erreur on renvoi sur liste des patients
+        header('location: index.php?ctrl=6&alert=9');
     }
 
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
+
+        // traitement de l'idPatients
+        $idPatients = intval(trim(filter_input(INPUT_POST, 'idPatients', FILTER_SANITIZE_NUMBER_INT)));
 
         // traitement input datetime
         $dateHour = trim(filter_input(INPUT_POST, 'dateHour', FILTER_SANITIZE_STRING));
@@ -43,57 +58,49 @@
             $form_error['dateHour'] = 'champ obligatoire';
         }   
 
-        $idPatients = intval(trim(filter_input(INPUT_POST, 'idPatients', FILTER_SANITIZE_NUMBER_INT)));
-
 
         // ---------------------------------------------- envoie info vers DB ----------------------------------------------------//
 
         if (empty($form_error)) {
 
-            $date = explode('T', $dateHour)[0];
-            $hour = explode('T', $dateHour)[1];
+            // on récupere l'id rdv à mettrre à jour
+            $old_id = $old_appointment->idAppointments;
 
             // on crée le nouvel objet patient
-            $new_appointment = new Appointment($dateHour, $idPatients);
+            $update_appointment = new Appointment($dateHour, $idPatients, $old_id);
 
             // on envoi en BDD
-            if ($new_appointment->add_new_appointment()) {
-
-                $last_id = Appointment::get_last_id();
+            if ($update_appointment->update_appointment()) {
                 
-                // retour page d'accueil et affichage message success !!!
-                $bdd_alert = 'nouveau rendez-vous: pour Mr blabla le '.$date.' à '.$hour.', enregistré en base de données..';
-                header('location: index.php?alert_type=success&bdd_alert='.$bdd_alert.'');
-
-                //header('location: index.php?ctrl=7&lastctrl=5&id='.$last_id->id.'&alert_type=success&bdd_alert='.$bdd_alert.'');
+                // affichage rendez-vous et message success !!!
+                header('location: index.php?ctrl=7&alert=11&idP='.$idPatients.'&idA='.$old_id.'');
                 
             } else {
 
                 // affichage bdd alert error message 
                 $alert_type = 'danger';
-                $bdd_alert ='Un rendez-vous le '.$date.' à '.$hour.' est déjà enregistré en base de données..';
+                $alert_msg ='Un rendez-vous le '.date('d-m-Y', strtotime($dateHour)).' à '.date('H:i', strtotime($dateHour)).' est déjà enregistré en base de données..';
 
             }
-            
-        } 
-
+        }
     } 
+    
 
     // -----------------------------------------------------------
-    // affichage de la vue ajout-rendez-vous
+    // affichage de la vue modifier-rendez-vous
     // -----------------------------------------------------------
 
     // appel du header
     require dirname(__FILE__).'/../views/templates/header.php';
 
-    // appel de la page ajouter rendez-vous
+    // appel de la page modifier rendez-vous
     include dirname(__FILE__).'/../views/modifier-rendezvous.php';
 
     // appel du footer
     require dirname(__FILE__).'/../views/templates/footer.php';
 
     // -----------------------------------------------------------
-    // affichage de la vue ajout-rendez-vous
+    // affichage de la vue modifier-rendez-vous
     // -----------------------------------------------------------
 
 ?>

@@ -3,13 +3,11 @@
 
     <img id="wall" class="img-fluid text-center" src="assets/img/doctor.jpg" alt="Photo du chu d'amiens">
 
-    <?php if(!empty($bdd_alert)) : ?>
-
+    <?php if(!empty($alert_msg)) : ?>
         <div class="col-12 alert alert-<?= $alert_type ?? 'danger' ?> alert-dismissible align-self-start">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <?= $bdd_alert ?>
+            <?= $alert_msg ?>
         </div>
-
     <?php endif ?>
 
 
@@ -17,16 +15,16 @@
 
         <!------------------------------------------ nouveau patient ------------------------------------------------>
 
-        <form action="index.php" method="POST">
+        <form action="" method="POST">
 
             <fieldset class="mb-2">
 
                 <legend class="txt1 pt-3 text-center">Rendez-vous</legend>
 
-                <div class="py-2 px-3 bg8 bl8">
+                <div class="py-2 px-3 bg8 bdc1 bl8">
                     <label class="txt1 text-center">Ancien rendez-vous</label>
-                    <div>Patient :</div>
-                    <div>Rendez-vous :</div>
+                    <div>Patient : <?= $old_appointment->lastname.' '.$old_appointment->firstname ?></div>
+                    <div>Rendez-vous : <?= $old_appointment->dateHour ?></div>
                 </div>
 
                 <label class="txt1 my-3">Modifier patient</label>
@@ -60,9 +58,11 @@
 
             <!------------------------------------------ submit ------------------------------------------------>
             <div class="text-center my-4">
-                <input type="hidden" name="ctrl" value="5">
-                <!-- <input type="hidden" name="id" value="<?= $patient->id ?>"> -->
-                <input class="btn bg1 bdc1 px-5" type="submit" value="mise à jour">
+                <input type="hidden" name="ctrl" value="8">
+                <input type="hidden" name="idA" value="<?= $old_appointment->idAppointments ?>">
+                <input type="hidden" name="idP" value="<?= $old_appointment->idPatients ?>">
+                <a href="index.php?ctrl=7&idA=<?= $old_appointment->idAppointments ?>&idP=<?= $old_appointment->idPatients ?>" class="btn bgW mr-3 px-4">Retour</a>
+                <input class="btn bg1 bdc1 px-4" type="submit" value="mise à jour">
             </div>  
 
         </form>

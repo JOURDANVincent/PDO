@@ -9,12 +9,9 @@
     $idPatients = intval(trim(filter_input($post, 'idPatients', FILTER_SANITIZE_NUMBER_INT)));
     //$lastctrl = intval(trim(filter_input(INPUT_GET, 'lastctrl', FILTER_SANITIZE_NUMBER_INT)));
 
-    //echo 'id'.$id.' patient '.$idPatients;
 
     // bdd : récupère les données du rdv en fonction de l'id envoyé
     $appointment_data = Appointment::get_appointment_data($id, $idPatients);
-
-    //var_dump($appointment_data); die;
 
     if (!$appointment_data) {
 
@@ -25,8 +22,8 @@
 
 
     // on réécrit la date pour le value d'input date
-    $date = implode('/', array_reverse(explode('-', explode(' ',$appointment_data->dateHour)[0])));
-    $hour = explode(' ',$appointment_data->dateHour)[1];
+    $date = date('Y-m-d', strtotime($appointment_data->dateHour));
+    $hour = date('H:i', strtotime($appointment_data->dateHour));
 
 
     // -----------------------------------------------------------

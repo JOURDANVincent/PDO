@@ -3,13 +3,11 @@
 
     <img id="wall" class="img-fluid text-center" src="assets/img/doctor.jpg" alt="Photo du chu d'amiens">
 
-    <?php if(!empty($bdd_alert)) : ?>
-
+    <?php if(!empty($alert_msg)) : ?>
         <div class="col-12 alert alert-<?= $alert_type ?? 'danger' ?> alert-dismissible align-self-start">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <?= $bdd_alert ?>
+            <?= $alert_msg ?>
         </div>
-
     <?php endif ?>
 
     <div id="mainContent" class="form-group col-4 bdc1 bl8 sha1 bgForm ">
@@ -27,8 +25,8 @@
 
                     <?php foreach($patients_list as $patient) : ?>
                         <div class="d-flex">
-                            <input required class="form-check-input" type="radio" name="idPatients" value="<?= $patient->id ?>" id="<?= $patient->id ?>">
-                            <label class="form-check-label" for="<?= $patient->id ?>">
+                            <input required class="form-check-input" type="radio" name="idPatients" value="<?= $patient->id ?>" id="id<?= $patient->id ?>">
+                            <label class="form-check-label" for="id<?= $patient->id ?>">
                                 <?= $patient->lastname.' '.$patient->firstname.' | '.$patient->mail ?>
                             </label>
                         </div>
@@ -54,7 +52,6 @@
             <!------------------------------------------ submit ------------------------------------------------>
             <div class="text-center my-4">
                 <input type="hidden" name="ctrl" value="5">
-                <!-- <input type="hidden" name="id" value="<?= $patient->id ?>"> -->
                 <input class="btn bg1 bdc1 px-5" type="submit" value="ajouter">
             </div>  
 

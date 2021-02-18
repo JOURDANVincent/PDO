@@ -1,8 +1,23 @@
 <?php
 
     // élément requis
-    require dirname(__FILE__).'/../models/Appointment.php';
-    require dirname(__FILE__).'/../utils/regex.php';
+    require_once dirname(__FILE__).'/../models/Appointment.php';
+
+
+    // traitement du rendez-vous à supprimer
+    $del = intval(trim(filter_input(INPUT_GET, 'del_idA', FILTER_SANITIZE_NUMBER_INT)));
+
+    if ($del !== 0) {
+
+        // demande de suppression
+        $del_appointment = Appointment::del_appointment($del);
+
+        if (!$del_appointment) {
+
+           // affichage liste de rdv et message erreur 
+            header('location: index.php?ctrl=6&alert=14');
+        }
+    }
 
 
     // récupère le nombre total de patient
@@ -25,22 +40,17 @@
     } 
 
 
-    // incrémentation du numéro de liste
-    $a = $sql_offset + 1;
-
     // bbd: récupère liste des rendez-vous
     $appointments_list = Appointment::get_appointments_list($sql_offset, $sql_limit);
 
     if (!$appointments_list || !is_array($appointments_list)) {
 
-        // si erreur on renvoi sur liste des appointments
-        $bdd_alert  = 'code '.$appointments_list.' : Erreur accès liste des rendez-vous';
-        header('location: index.php?alert_type=danger&bdd_alert='.$bdd_alert.'');
+        // affichage accueil et message d'erreur
+        header('location: index.php?alert=10');
     }
 
-    //récupère les messages d'alerte success et danger
-    $bdd_alert = trim(filter_input(INPUT_GET, 'bdd_alert', FILTER_SANITIZE_STRING));
-    $alert_type = trim(filter_input(INPUT_GET, 'alert_type', FILTER_SANITIZE_STRING));
+    // incrémentation du numéro de liste
+    $a = $sql_offset + 1;
 
 
     // -----------------------------------------------------------

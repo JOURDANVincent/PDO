@@ -2,7 +2,8 @@
 
 
     // requis: fichier init.php / server_ctrl
-    require dirname(__FILE__).'/utils/init.php';
+    require_once dirname(__FILE__).'/utils/init.php';
+    require_once dirname(__FILE__).'/utils/alert.php';
 
     
     if (($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['ctrl'])) || ($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['ctrl']))) {
@@ -63,9 +64,6 @@
 
         // appel du header
         require dirname(__FILE__).'/views/templates/header.php';
-
-        $bdd_alert = trim(filter_input(INPUT_GET, 'bdd_alert', FILTER_SANITIZE_STRING));
-        $alert_type = trim(filter_input(INPUT_GET, 'alert_type', FILTER_SANITIZE_STRING));
 
         // appel de la page d'accueil
         include dirname(__FILE__).'/views/home.php';

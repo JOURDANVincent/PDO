@@ -16,13 +16,12 @@
     if (!$appointment_data) {
 
         // si erreur on renvoi sur liste des patients
-        $bdd_alert  = 'Erreur modification profil du patient';
-        header('location: index.php?ctrl=6&alert_type=danger&bdd_alert='.$bdd_alert.'');
+        header('location: index.php?alert=10');
     }
 
     // on réécrit la date pour le value d'input date
-    $date = implode('/', array_reverse(explode('-', explode(' ',$appointment_data->dateHour)[0])));
-    $hour = explode(' ',$appointment_data->dateHour)[1];
+    $date = date('Y-m-d', strtotime($appointment_data->dateHour));
+    $hour = date('H:i', strtotime($appointment_data->dateHour));
 
 
     // -----------------------------------------------------------

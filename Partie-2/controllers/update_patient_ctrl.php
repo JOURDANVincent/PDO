@@ -14,8 +14,7 @@
     if (!$patient_profil) {
 
         // si erreur on renvoi sur liste des patients
-        $bdd_alert  = 'Erreur modification profil du patient';
-        header('location: index.php?ctrl=2&alert_type=danger&bdd_alert='.$bdd_alert.'');
+        header('location: index.php?ctrl=2&alert=3');
     }
 
 
@@ -36,15 +35,14 @@
             // on envoi en BDD
             if ($update_patient->update_patient()) {
                 
-                // retour page d'accueil et affichage message success !
-                $bdd_alert = 'Mise à jour des données du patient: '.$lastname.' '.$firstname.', réussie !';
-                header('location: index.php?ctrl=3&id='.$id.'&alert_type=success&bdd_alert='.$bdd_alert.'');
+                // affichage profil et message success !
+                header('location: index.php?ctrl=3&id='.$id.'&alert=5');
                 
             } else {
 
                 // bdd alert message error !
                 $alert_type = 'danger';
-                $bdd_alert ='Impossible de mettre à jour les données du patient: '.$lastname.' '.$firstname.' ..';
+                $alert_msg ='Impossible de mettre à jour les données du patient: '.$lastname.' '.$firstname.' ..';
 
             }
             
